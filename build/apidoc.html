@@ -1,0 +1,3566 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/ternjs/tern#readme"
+
+    >tern (v0.21.0)</a>
+</h1>
+<h4>A JavaScript code analyzer for deep, cross-editor language support</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern">module tern</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server">
+            function <span class="apidocSignatureSpan">tern.</span>Server
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.addCompletion">
+            function <span class="apidocSignatureSpan">tern.</span>addCompletion
+            <span class="apidocSignatureSpan">(query, completions, name, aval, depth)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.defineQueryType">
+            function <span class="apidocSignatureSpan">tern.</span>defineQueryType
+            <span class="apidocSignatureSpan">(name, desc)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.findQueryExpr">
+            function <span class="apidocSignatureSpan">tern.</span>findQueryExpr
+            <span class="apidocSignatureSpan">(file, query, wide)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.getSpan">
+            function <span class="apidocSignatureSpan">tern.</span>getSpan
+            <span class="apidocSignatureSpan">(obj)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.outputPos">
+            function <span class="apidocSignatureSpan">tern.</span>outputPos
+            <span class="apidocSignatureSpan">(query, file, pos)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.registerPlugin">
+            function <span class="apidocSignatureSpan">tern.</span>registerPlugin
+            <span class="apidocSignatureSpan">(name, init)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.resolvePos">
+            function <span class="apidocSignatureSpan">tern.</span>resolvePos
+            <span class="apidocSignatureSpan">(file, pos, tolerant)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.storeSpan">
+            function <span class="apidocSignatureSpan">tern.</span>storeSpan
+            <span class="apidocSignatureSpan">(srv, query, span, target)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>Server.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>comment</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>condense</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>def</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>defaultOptions</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>infer</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.</span>signal</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">tern.</span>version</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.Server">module tern.Server</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.Server">
+            function <span class="apidocSignatureSpan">tern.</span>Server
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.Server.prototype">module tern.Server.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.addDefs">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>addDefs
+            <span class="apidocSignatureSpan">(defs, toFront)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.addFile">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>addFile
+            <span class="apidocSignatureSpan">(name, text, parent)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.delFile">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>delFile
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.deleteDefs">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>deleteDefs
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.findFile">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>findFile
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.finishAsyncAction">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>finishAsyncAction
+            <span class="apidocSignatureSpan">(err)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.flush">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>flush
+            <span class="apidocSignatureSpan">(c)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.hasHandler">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>hasHandler
+            <span class="apidocSignatureSpan">(type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.loadPlugin">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>loadPlugin
+            <span class="apidocSignatureSpan">(name, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.normalizeFilename">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>normalizeFilename
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.off">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>off
+            <span class="apidocSignatureSpan">(type, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.on">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>on
+            <span class="apidocSignatureSpan">(type, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.request">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>request
+            <span class="apidocSignatureSpan">(doc, c)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.reset">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>reset
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.signal">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>signal
+            <span class="apidocSignatureSpan">(type, a1, a2, a3, a4)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.signalReturnFirst">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>signalReturnFirst
+            <span class="apidocSignatureSpan">(type, a1, a2, a3, a4)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.Server.prototype.startAsyncAction">
+            function <span class="apidocSignatureSpan">tern.Server.prototype.</span>startAsyncAction
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.comment">module tern.comment</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.comment.commentAfter">
+            function <span class="apidocSignatureSpan">tern.comment.</span>commentAfter
+            <span class="apidocSignatureSpan">(text, pos)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.comment.commentsBefore">
+            function <span class="apidocSignatureSpan">tern.comment.</span>commentsBefore
+            <span class="apidocSignatureSpan">(text, pos)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.comment.ensureCommentsBefore">
+            function <span class="apidocSignatureSpan">tern.comment.</span>ensureCommentsBefore
+            <span class="apidocSignatureSpan">(text, node)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.condense">module tern.condense</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.condense.condense">
+            function <span class="apidocSignatureSpan">tern.</span>condense
+            <span class="apidocSignatureSpan">(origins, name, options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.def">module tern.def</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.def.init">
+            function <span class="apidocSignatureSpan">tern.def.</span>init
+            <span class="apidocSignatureSpan">(exports, infer)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.defaultOptions">module tern.defaultOptions</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">tern.defaultOptions.</span>async</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">tern.defaultOptions.</span>debug</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">tern.defaultOptions.</span>reuseInstances</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">tern.defaultOptions.</span>stripCRs</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.defaultOptions.getFile">
+            function <span class="apidocSignatureSpan">tern.defaultOptions.</span>getFile
+            <span class="apidocSignatureSpan">(_f, c)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.defaultOptions.normalizeFilename">
+            function <span class="apidocSignatureSpan">tern.defaultOptions.</span>normalizeFilename
+            <span class="apidocSignatureSpan">(name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">tern.defaultOptions.</span>dependencyBudget</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">tern.defaultOptions.</span>ecmaVersion</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">tern.defaultOptions.</span>fetchTimeout</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.defaultOptions.</span>defs</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.defaultOptions.</span>parent</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.defaultOptions.</span>plugins</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">tern.defaultOptions.</span>projectDir</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.infer">module tern.infer</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.AVal">
+            function <span class="apidocSignatureSpan">tern.infer.</span>AVal
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Arr">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Arr
+            <span class="apidocSignatureSpan">(contentType)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Context">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Context
+            <span class="apidocSignatureSpan">(defs, parent)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.DefProp">
+            function <span class="apidocSignatureSpan">tern.infer.</span>DefProp
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Fn">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Fn
+            <span class="apidocSignatureSpan">(name, self, args, argNames, retval, generator)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.IfObj">
+            function <span class="apidocSignatureSpan">tern.infer.</span>IfObj
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.IsCallee">
+            function <span class="apidocSignatureSpan">tern.infer.</span>IsCallee
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.IsCtor">
+            function <span class="apidocSignatureSpan">tern.infer.</span>IsCtor
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.IsProto">
+            function <span class="apidocSignatureSpan">tern.infer.</span>IsProto
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Obj">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Obj
+            <span class="apidocSignatureSpan">(proto, name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Prim">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Prim
+            <span class="apidocSignatureSpan">(proto, name)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.PropHasSubset">
+            function <span class="apidocSignatureSpan">tern.infer.</span>PropHasSubset
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Scope">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Scope
+            <span class="apidocSignatureSpan">(prev, originNode, isBlock, isCatch)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Sym">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Sym
+            <span class="apidocSignatureSpan">(name, originNode)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.TimedOut">
+            function <span class="apidocSignatureSpan">tern.infer.</span>TimedOut
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.Type">
+            function <span class="apidocSignatureSpan">tern.infer.</span>Type
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.addOrigin">
+            function <span class="apidocSignatureSpan">tern.infer.</span>addOrigin
+            <span class="apidocSignatureSpan">(origin)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.analyze">
+            function <span class="apidocSignatureSpan">tern.infer.</span>analyze
+            <span class="apidocSignatureSpan">(ast, name, scope)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.clearScopes">
+            function <span class="apidocSignatureSpan">tern.infer.</span>clearScopes
+            <span class="apidocSignatureSpan">(ast)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.constraint">
+            function <span class="apidocSignatureSpan">tern.infer.</span>constraint
+            <span class="apidocSignatureSpan">(methods)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.cx">
+            function <span class="apidocSignatureSpan">tern.infer.</span>cx
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.didGuess">
+            function <span class="apidocSignatureSpan">tern.infer.</span>didGuess
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.expressionType">
+            function <span class="apidocSignatureSpan">tern.infer.</span>expressionType
+            <span class="apidocSignatureSpan">(found)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.findExpressionAround">
+            function <span class="apidocSignatureSpan">tern.infer.</span>findExpressionAround
+            <span class="apidocSignatureSpan">(ast, start, end, defaultScope, filter)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.findExpressionAt">
+            function <span class="apidocSignatureSpan">tern.infer.</span>findExpressionAt
+            <span class="apidocSignatureSpan">(ast, start, end, defaultScope, filter)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.findPropRefs">
+            function <span class="apidocSignatureSpan">tern.infer.</span>findPropRefs
+            <span class="apidocSignatureSpan">(ast, scope, objType, name, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.findRefs">
+            function <span class="apidocSignatureSpan">tern.infer.</span>findRefs
+            <span class="apidocSignatureSpan">(ast, baseScope, name, refScope, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.forAllLocalsAt">
+            function <span class="apidocSignatureSpan">tern.infer.</span>forAllLocalsAt
+            <span class="apidocSignatureSpan">(ast, pos, defaultScope, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.forAllPropertiesOf">
+            function <span class="apidocSignatureSpan">tern.infer.</span>forAllPropertiesOf
+            <span class="apidocSignatureSpan">(type, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.getInstance">
+            function <span class="apidocSignatureSpan">tern.infer.</span>getInstance
+            <span class="apidocSignatureSpan">(obj, ctor)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.getSymbol">
+            function <span class="apidocSignatureSpan">tern.infer.</span>getSymbol
+            <span class="apidocSignatureSpan">(name, originNode)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.parentNode">
+            function <span class="apidocSignatureSpan">tern.infer.</span>parentNode
+            <span class="apidocSignatureSpan">(child, ast)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.parse">
+            function <span class="apidocSignatureSpan">tern.infer.</span>parse
+            <span class="apidocSignatureSpan">(text, options, thirdArg)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.propName">
+            function <span class="apidocSignatureSpan">tern.infer.</span>propName
+            <span class="apidocSignatureSpan">(node, inferInScope)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.purge">
+            function <span class="apidocSignatureSpan">tern.infer.</span>purge
+            <span class="apidocSignatureSpan">(origins, start, end)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.registerFunction">
+            function <span class="apidocSignatureSpan">tern.infer.</span>registerFunction
+            <span class="apidocSignatureSpan">(name, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.resetGuessing">
+            function <span class="apidocSignatureSpan">tern.infer.</span>resetGuessing
+            <span class="apidocSignatureSpan">(val)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.scopeAt">
+            function <span class="apidocSignatureSpan">tern.infer.</span>scopeAt
+            <span class="apidocSignatureSpan">(ast, pos, defaultScope)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.simplifyTypes">
+            function <span class="apidocSignatureSpan">tern.infer.</span>simplifyTypes
+            <span class="apidocSignatureSpan">(types)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.toString">
+            function <span class="apidocSignatureSpan">tern.infer.</span>toString
+            <span class="apidocSignatureSpan">(type, maxDepth, parent)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.typeFromContext">
+            function <span class="apidocSignatureSpan">tern.infer.</span>typeFromContext
+            <span class="apidocSignatureSpan">(ast, found)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.withContext">
+            function <span class="apidocSignatureSpan">tern.infer.</span>withContext
+            <span class="apidocSignatureSpan">(context, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.infer.withTimeout">
+            function <span class="apidocSignatureSpan">tern.infer.</span>withTimeout
+            <span class="apidocSignatureSpan">(ms, f)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>ANull</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>def</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>findTypeFromContext</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>fullVisitor</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>inferExprVisitor</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>inferPatternVisitor</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>inferWrapper</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>scopeGatherer</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>searchVisitor</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">tern.infer.</span>typeFinder</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.tern.signal">module tern.signal</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.tern.signal.mixin">
+            function <span class="apidocSignatureSpan">tern.signal.</span>mixin
+            <span class="apidocSignatureSpan">(obj)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern" id="apidoc.module.tern">module tern</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server" id="apidoc.element.tern.Server">
+        function <span class="apidocSignatureSpan">tern.</span>Server
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Server = function (options) {
+  this.cx = null;
+  this.options = options || {};
+  for (var o in defaultOptions) if (!options.hasOwnProperty(o))
+    options[o] = defaultOptions[o];
+
+  this.projectDir = options.projectDir.replace(/\\/g, &#x22;/&#x22;)
+  if (!/\/$/.test(this.projectDir)) this.projectDir += &#x22;/&#x22;
+
+  this.parent = options.parent;
+  this.handlers = Object.create(null);
+  this.files = [];
+  this.fileMap = Object.create(null);
+  this.needsPurge = [];
+  this.budgets = Object.create(null);
+  this.uses = 0;
+  this.pending = 0;
+  this.asyncError = null;
+  this.mod = {}
+
+  this.defs = options.defs.slice(0)
+  this.plugins = Object.create(null)
+  for (var plugin in options.plugins) if (options.plugins.hasOwnProperty(plugin))
+    this.loadPlugin(plugin, options.plugins[plugin])
+
+  this.reset();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.addCompletion" id="apidoc.element.tern.addCompletion">
+        function <span class="apidocSignatureSpan">tern.</span>addCompletion
+        <span class="apidocSignatureSpan">(query, completions, name, aval, depth)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addCompletion = function (query, completions, name, aval, depth) {
+  var typeInfo = query.types || query.docs || query.urls || query.origins;
+  var wrapAsObjs = typeInfo || query.depths;
+
+  for (var i = 0; i &#x3c; completions.length; ++i) {
+    var c = completions[i];
+    if ((wrapAsObjs ? c.name : c) == name) return;
+  }
+  var rec = wrapAsObjs ? {name: name} : name;
+  completions.push(rec);
+
+  if (aval &#x26;&#x26; typeInfo) {
+    infer.resetGuessing();
+    var type = aval.getType();
+    rec.guess = infer.didGuess();
+    if (query.types)
+      rec.type = infer.toString(aval);
+    if (query.docs)
+      maybeSet(rec, &#x22;doc&#x22;, parseDoc(query, aval.doc || type &#x26;&#x26; type.doc));
+    if (query.urls)
+      maybeSet(rec, &#x22;url&#x22;, aval.url || type &#x26;&#x26; type.url);
+    if (query.origins)
+      maybeSet(rec, &#x22;origin&#x22;, aval.origin || type &#x26;&#x26; type.origin);
+  }
+  if (query.depths) rec.depth = depth || 0;
+  return rec;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+return this.modules[name] || (this.modules[name] = new infer.AVal)
+    },
+
+    completeModuleName: function(completions, query, word) {
+function fromObj(obj, useVal) {
+  for (var name in obj)
+    if (filter(word, name, query))
+      tern.<span class="apidocCodeKeywordSpan">addCompletion</span>(query, completions, name, useVal &#x26;&#x26; obj[name])
+}
+
+fromObj(this.knownModules, true)
+if (this.options.modules) fromObj(this.options.modules, false)
+
+var pathsSeen = Object.create(null)
+for (var prop in this.nonRelative) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.defineQueryType" id="apidoc.element.tern.defineQueryType">
+        function <span class="apidocSignatureSpan">tern.</span>defineQueryType
+        <span class="apidocSignatureSpan">(name, desc)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">defineQueryType = function (name, desc) { queryTypes[name] = desc; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  server.on(&#x22;preCondenseReach&#x22;, preCondenseReach)
+  server.on(&#x22;postLoadDef&#x22;, postLoadDef)
+  server.on(&#x22;typeAt&#x22;, findTypeAt)
+  server.on(&#x22;completion&#x22;, findCompletions)
+})
+
+tern.<span class="apidocCodeKeywordSpan">defineQueryType</span>(&#x22;exports&#x22;, {
+  takesFile: true,
+  run: function(server, query, file) {
+    function describe(aval) {
+      var target = {}, type = aval.getType(false)
+      target.type = infer.toString(type, 3)
+      var doc = aval.doc || (type &#x26;&#x26; type.doc), url = aval.url || (type &#x26;&#x26; type.url)
+      if (doc) target.doc = doc
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.findQueryExpr" id="apidoc.element.tern.findQueryExpr">
+        function <span class="apidocSignatureSpan">tern.</span>findQueryExpr
+        <span class="apidocSignatureSpan">(file, query, wide)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findQueryExpr = function (file, query, wide) {
+  if (query.end == null) throw ternError(&#x22;missing .query.end field&#x22;);
+
+  if (query.variable) {
+    var scope = infer.scopeAt(file.ast, resolvePos(file, query.end), file.scope);
+    return {node: {type: &#x22;Identifier&#x22;, name: query.variable, start: query.end, end: query.end + 1},
+            state: scope};
+  } else {
+    var start = query.start &#x26;&#x26; resolvePos(file, query.start), end = resolvePos(file, query.end);
+    var expr = infer.findExpressionAt(file.ast, start, end, file.scope);
+    if (!expr) {
+      var around = infer.findExpressionAround(file.ast, start, end, file.scope);
+      if (around &#x26;&#x26; !inBody(around.node, end) &#x26;&#x26;
+          (around.node.type == &#x22;ObjectExpression&#x22; || wide ||
+           (start == null ? end : start) - around.node.start &#x3c; 20 || around.node.end - end &#x3c; 20))
+        expr = around
+    }
+    return expr
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.getSpan" id="apidoc.element.tern.getSpan">
+        function <span class="apidocSignatureSpan">tern.</span>getSpan
+        <span class="apidocSignatureSpan">(obj)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getSpan = function (obj) {
+  if (!obj.origin) return;
+  if (obj.originNode) {
+    var node = obj.originNode;
+    if (/^Function/.test(node.type) &#x26;&#x26; node.id) node = node.id;
+    return {origin: obj.origin, node: node};
+  }
+  if (obj.span) return {origin: obj.origin, span: obj.span};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (!(actual instanceof infer.Prim)) actual.path = newPath;
+  if (actual.reached(newPath, state, !relevant) &#x26;&#x26; relevant) {
+    var data = state.types[oldPath];
+    if (data) {
+      delete state.types[oldPath];
+      state.altPaths[oldPath] = actual;
+    } else data = {type: actual};
+    data.span = state.<span class="apidocCodeKeywordSpan">getSpan</span>(type) || (actual != type &#x26;&#x26; state.isTarget(actual
+.origin) &#x26;&#x26; state.getSpan(actual)) || data.span;
+    data.doc = type.doc || (actual != type &#x26;&#x26; state.isTarget(actual.origin) &#x26;&#x26; actual.doc) || data.doc;
+    data.data = actual.metaData;
+    data.byName = data.byName == null ? !!byName : data.byName &#x26;&#x26; byName;
+    state.types[newPath] = data;
+  }
+} else {
+  if (relevant) state.altPaths[newPath] = actual;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.outputPos" id="apidoc.element.tern.outputPos">
+        function <span class="apidocSignatureSpan">tern.</span>outputPos
+        <span class="apidocSignatureSpan">(query, file, pos)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">outputPos = function (query, file, pos) {
+  if (query.lineCharPositions) {
+    var out = asLineChar(file, pos);
+    if (file.type == &#x22;part&#x22;)
+      out.line += file.offsetLines != null ? file.offsetLines : asLineChar(file.backing, file.offset).line;
+    return out;
+  } else {
+    return charDistanceBetween(file, 0, pos) + (file.type == &#x22;part&#x22; ? file.offset : 0);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        if (query.types) rec.type = &#x22;string&#x22;;
+        if (query.origins) rec.origin = seen[str];
+      } else {
+        matches.push(JSON.stringify(str));
+      }
+    }
+    if (matches.length) return {
+      start: tern.<span class="apidocCodeKeywordSpan">outputPos</span>(query, file, lit.node.start),
+      end: tern.outputPos(query, file, pos + (file.text.charAt(pos) == file.text.charAt(lit.node.start) ? 1 : 0)),
+      isProperty: false,
+      completions: matches
+    };
+  }
+});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.registerPlugin" id="apidoc.element.tern.registerPlugin">
+        function <span class="apidocSignatureSpan">tern.</span>registerPlugin
+        <span class="apidocSignatureSpan">(name, init)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">registerPlugin = function (name, init) { plugins[name] = init; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+server.mod.angular = {
+  modules: Object.create(null),
+  pendingImports: Object.create(null),
+  nakedModules: []
+};
+  }
+
+  tern.<span class="apidocCodeKeywordSpan">registerPlugin</span>(&#x22;angular&#x22;, function(server) {
+initServer(server);
+
+server.on(&#x22;reset&#x22;, function() { initServer(server); });
+server.on(&#x22;postParse&#x22;, postParse)
+server.on(&#x22;postLoadDef&#x22;, postLoadDef)
+server.on(&#x22;preCondenseReach&#x22;, preCondenseReach)
+server.on(&#x22;postCondenseReach&#x22;, postCondenseReach)
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.resolvePos" id="apidoc.element.tern.resolvePos">
+        function <span class="apidocSignatureSpan">tern.</span>resolvePos
+        <span class="apidocSignatureSpan">(file, pos, tolerant)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">resolvePos = function (file, pos, tolerant) {
+  if (typeof pos != &#x22;number&#x22;) {
+    var lineStart = findLineStart(file, pos.line);
+    if (lineStart == null) {
+      if (tolerant) pos = file.text.length;
+      else throw ternError(&#x22;File doesn&#x27;t contain a line &#x22; + pos.line);
+    } else {
+      pos = forwardCharacters(file, lineStart, pos.ch);
+    }
+  } else {
+    pos = forwardCharacters(file, 0, pos)
+  }
+  if (pos &#x3e; file.text.length) {
+    if (tolerant) pos = file.text.length;
+    else throw ternError(&#x22;Position &#x22; + pos + &#x22; is outside of file.&#x22;);
+  }
+  return pos;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      if (typeof node.value == &#x22;string&#x22; &#x26;&#x26; node.value &#x26;&#x26; node.value.length &#x3c; data.maxLen)
+        data.seen[node.value] = ast.sourceFile.name;
+    }
+  });
+}
+
+function complete(file, query) {
+  var pos = tern.<span class="apidocCodeKeywordSpan">resolvePos</span>(file, query.end);
+  var lit = infer.findExpressionAround(file.ast, null, pos, file.scope, &#x22;Literal&#x22;);
+  if (!lit || typeof lit.node.value != &#x22;string&#x22;) return;
+  var before = lit.node.value.slice(0, pos - lit.node.start - 1);
+  var matches = [], seen = infer.cx().parent.mod.completeStrings.seen;
+  for (var str in seen) if (str.length &#x3e; before.length &#x26;&#x26; str.indexOf(before) == 0) {
+    if (query.types || query.docs || query.urls || query.origins) {
+      var rec = {name: JSON.stringify(str), displayName: str};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.storeSpan" id="apidoc.element.tern.storeSpan">
+        function <span class="apidocSignatureSpan">tern.</span>storeSpan
+        <span class="apidocSignatureSpan">(srv, query, span, target)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">storeSpan = function (srv, query, span, target) {
+  target.origin = span.origin;
+  if (span.span) {
+    var m = /^(\d+)\[(\d+):(\d+)\]-(\d+)\[(\d+):(\d+)\]$/.exec(span.span);
+    target.start = query.lineCharPositions ? {line: Number(m[2]), ch: Number(m[3])} : Number(m[1]);
+    target.end = query.lineCharPositions ? {line: Number(m[5]), ch: Number(m[6])} : Number(m[4]);
+  } else {
+    var file = srv.fileMap[span.origin];
+    target.start = outputPos(query, file, span.node.start);
+    target.end = outputPos(query, file, span.node.end);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+function describe(aval) {
+  var target = {}, type = aval.getType(false)
+  target.type = infer.toString(type, 3)
+  var doc = aval.doc || (type &#x26;&#x26; type.doc), url = aval.url || (type &#x26;&#x26; type.url)
+  if (doc) target.doc = doc
+  if (url) target.url = url
+  var span = tern.getSpan(aval) || (type &#x26;&#x26; tern.getSpan(type))
+  if (span) tern.<span class="apidocCodeKeywordSpan">storeSpan</span>(server, query, span, target)
+  return target
+}
+
+var mod = server.mod.modules, known = mod &#x26;&#x26; mod.modules[file.name]
+if (!known) return {}
+var resp = describe(known);
+var type = known.getType(false)
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.Server" id="apidoc.module.tern.Server">module tern.Server</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.Server" id="apidoc.element.tern.Server.Server">
+        function <span class="apidocSignatureSpan">tern.</span>Server
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Server = function (options) {
+  this.cx = null;
+  this.options = options || {};
+  for (var o in defaultOptions) if (!options.hasOwnProperty(o))
+    options[o] = defaultOptions[o];
+
+  this.projectDir = options.projectDir.replace(/\\/g, &#x22;/&#x22;)
+  if (!/\/$/.test(this.projectDir)) this.projectDir += &#x22;/&#x22;
+
+  this.parent = options.parent;
+  this.handlers = Object.create(null);
+  this.files = [];
+  this.fileMap = Object.create(null);
+  this.needsPurge = [];
+  this.budgets = Object.create(null);
+  this.uses = 0;
+  this.pending = 0;
+  this.asyncError = null;
+  this.mod = {}
+
+  this.defs = options.defs.slice(0)
+  this.plugins = Object.create(null)
+  for (var plugin in options.plugins) if (options.plugins.hasOwnProperty(plugin))
+    this.loadPlugin(plugin, options.plugins[plugin])
+
+  this.reset();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.Server.prototype" id="apidoc.module.tern.Server.prototype">module tern.Server.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.addDefs" id="apidoc.element.tern.Server.prototype.addDefs">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>addDefs
+        <span class="apidocSignatureSpan">(defs, toFront)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addDefs = function (defs, toFront) {
+  if (toFront) this.defs.unshift(defs)
+  else this.defs.push(defs)
+
+  if (this.cx) this.reset()
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  server.on(&#x22;reset&#x22;, function() { initServer(server); });
+  server.on(&#x22;postParse&#x22;, postParse)
+  server.on(&#x22;postLoadDef&#x22;, postLoadDef)
+  server.on(&#x22;preCondenseReach&#x22;, preCondenseReach)
+  server.on(&#x22;postCondenseReach&#x22;, postCondenseReach)
+
+  server.<span class="apidocCodeKeywordSpan">addDefs</span>(defs, true)
+});
+
+var defs = {
+  &#x22;!name&#x22;: &#x22;angular&#x22;,
+  &#x22;!define&#x22;: {
+    cacheObj: {
+      info: &#x22;fn() -&#x3e; ?&#x22;,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.addFile" id="apidoc.element.tern.Server.prototype.addFile">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>addFile
+        <span class="apidocSignatureSpan">(name, text, parent)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addFile = function (name, text, parent) {
+  // Don&#x27;t crash when sloppy plugins pass non-existent parent ids
+  if (parent &#x26;&#x26; !(parent in this.fileMap)) parent = null;
+  if (!(name in this.fileMap))
+    name = this.normalizeFilename(name)
+  ensureFile(this, name, parent, text);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return resolved
+  }
+
+  var known = this.modules[resolved]
+  if (known) return known
+
+  if (/\.js$|(?:^\/)[^\.]+$/.test(resolved))
+    this.server.<span class="apidocCodeKeywordSpan">addFile</span>(resolved, null, parentFile)
+  if (!relative) this.nonRelative[name] = resolved
+  return this.modules[resolved] = new infer.AVal
+},
+
+findIn: function(array, node, pos) {
+  for (var i = 0; i &#x3c; array.length; i++) {
+    var name = array[i](node, pos)
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.delFile" id="apidoc.element.tern.Server.prototype.delFile">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>delFile
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">delFile = function (name) {
+  var file = this.findFile(name);
+  if (file) {
+    this.needsPurge.push(file.name);
+    for (var i = 0; i &#x3c; this.files.length; i++) {
+      if (this.files[i] == file) this.files.splice(i--, 1);
+      else if (this.files[i].parent == name) this.files[i].parent = null;
+    }
+    delete this.fileMap[file.name];
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.deleteDefs" id="apidoc.element.tern.Server.prototype.deleteDefs">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>deleteDefs
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">deleteDefs = function (name) {
+  for (var i = 0; i &#x3c; this.defs.length; i++) if (this.defs[i][&#x22;!name&#x22;] == name) {
+    this.defs.splice(i, 1);
+    if (this.cx) this.reset();
+    return;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.findFile" id="apidoc.element.tern.Server.prototype.findFile">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>findFile
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findFile = function (name) {
+  return this.fileMap[this.normalizeFilename(name)];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return this.origins.indexOf(origin) &#x3e; -1;
+};
+
+State.prototype.getSpan = function(node) {
+  if (this.options.spans == false || !this.isTarget(node.origin)) return null;
+  if (node.span) return node.span;
+  var srv = this.cx.parent, file;
+  if (!srv || !node.originNode || !(file = srv.<span class="apidocCodeKeywordSpan">findFile</span>(node.origin))) return null;
+  var start = node.originNode.start, end = node.originNode.end;
+  var pStart = file.asLineChar(start), pEnd = file.asLineChar(end);
+  return start + &#x22;[&#x22; + pStart.line + &#x22;:&#x22; + pStart.ch + &#x22;]-&#x22; +
+    end + &#x22;[&#x22; + pEnd.line + &#x22;:&#x22; + pEnd.ch + &#x22;]&#x22;;
+};
+
+function pathLen(path) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.finishAsyncAction" id="apidoc.element.tern.Server.prototype.finishAsyncAction">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>finishAsyncAction
+        <span class="apidocSignatureSpan">(err)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">finishAsyncAction = function (err) {
+  if (err) this.asyncError = err;
+  if (--this.pending === 0) this.signal(&#x22;everythingFetched&#x22;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.flush" id="apidoc.element.tern.Server.prototype.flush">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>flush
+        <span class="apidocSignatureSpan">(c)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">flush = function (c) {
+  var cx = this.cx;
+  analyzeAll(this, null, function(err) {
+    if (err) return c(err);
+    infer.withContext(cx, c);
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.hasHandler" id="apidoc.element.tern.Server.prototype.hasHandler">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>hasHandler
+        <span class="apidocSignatureSpan">(type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function hasHandler(type) {
+  var arr = this._handlers &#x26;&#x26; this._handlers[type]
+  return arr &#x26;&#x26; arr.length &#x3e; 0 &#x26;&#x26; arr
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.loadPlugin" id="apidoc.element.tern.Server.prototype.loadPlugin">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>loadPlugin
+        <span class="apidocSignatureSpan">(name, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">loadPlugin = function (name, options) {
+  if (arguments.length == 1) options = this.options.plugins[name] || true
+  if (name in this.plugins || !(name in plugins) || !options) return
+  this.plugins[name] = true
+  var init = plugins[name](this, options)
+
+  // This is for backwards-compatibilty. Don&#x27;t rely on it -- use addDef and on directly
+  if (!init) return
+  if (init.defs) this.addDefs(init.defs, init.loadFirst)
+  if (init.passes) for (var type in init.passes) if (init.passes.hasOwnProperty(type))
+    this.on(type, init.passes[type])
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+function hasProps(obj) {
+  if (obj) for (var _prop in obj) return true
+}
+
+tern.registerPlugin(&#x22;commonjs&#x22;, function(server) {
+  server.<span class="apidocCodeKeywordSpan">loadPlugin</span>(&#x22;modules&#x22;)
+  server.mod.modules.on(&#x22;wrapScope&#x22;, initScope)
+  server.mod.modules.on(&#x22;getExports&#x22;, function(file, mod) {
+    var exports = file.scope.exports
+    if (exports.types.length &#x3e; 1 || hasProps(exports.getObjType()))
+      exports.propagate(mod)
+  })
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.normalizeFilename" id="apidoc.element.tern.Server.prototype.normalizeFilename">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>normalizeFilename
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">normalizeFilename = function (name) {
+  var norm = this.options.normalizeFilename(name).replace(/\\/g, &#x22;/&#x22;)
+  if (norm.indexOf(this.projectDir) == 0) norm = norm.slice(this.projectDir.length)
+  return norm
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var base = endSlash ? word : path.dirname(word) + &#x22;/&#x22;
+  var filePart = endSlash ? &#x22;&#x22; : path.basename(word)
+
+  var me = this
+  fs.readdirSync(dir).forEach(function(file) {
+    if (/^\./.test(file)) return
+    if (filter(filePart, file, query)) {
+      var projectPath = me.server.<span class="apidocCodeKeywordSpan">normalizeFilename</span>(path.relative(pDir, path.resolve(
+dir, file)))
+      if (projectPath == parentFile) return
+      var value = me.modules[projectPath]
+      if (/\.js$/.test(file)) file = file.slice(0, file.length - 3)
+      tern.addCompletion(query, completions, base + file, value)
+    }
+  })
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.off" id="apidoc.element.tern.Server.prototype.off">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>off
+        <span class="apidocSignatureSpan">(type, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function off(type, f) {
+  var arr = this._handlers &#x26;&#x26; this._handlers[type];
+  if (arr) for (var i = 0; i &#x3c; arr.length; ++i)
+    if (arr[i] == f) { arr.splice(i, 1); break; }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.on" id="apidoc.element.tern.Server.prototype.on">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>on
+        <span class="apidocSignatureSpan">(type, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function on(type, f) {
+  var handlers = this._handlers || (this._handlers = Object.create(null));
+  (handlers[type] || (handlers[type] = [])).push(f);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    nakedModules: []
+  };
+}
+
+tern.registerPlugin(&#x22;angular&#x22;, function(server) {
+  initServer(server);
+
+  server.<span class="apidocCodeKeywordSpan">on</span>(&#x22;reset&#x22;, function() { initServer(server); });
+  server.on(&#x22;postParse&#x22;, postParse)
+  server.on(&#x22;postLoadDef&#x22;, postLoadDef)
+  server.on(&#x22;preCondenseReach&#x22;, preCondenseReach)
+  server.on(&#x22;postCondenseReach&#x22;, postCondenseReach)
+
+  server.addDefs(defs, true)
+});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.request" id="apidoc.element.tern.Server.prototype.request">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>request
+        <span class="apidocSignatureSpan">(doc, c)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">request = function (doc, c) {
+  var inv = invalidDoc(doc);
+  if (inv) return c(inv);
+
+  var self = this;
+  doRequest(this, doc, function(err, data) {
+    c(err, data);
+    if (self.uses &#x3e; 40) {
+      self.reset();
+      analyzeAll(self, null, function(){});
+    }
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  &#x22;!type&#x22;: &#x22;fn(options: ?, callback?: fn(res: +http.IncomingMessage)) -&#x3e; +http.ClientRequest&#x22;,
+  &#x22;!url&#x22;: &#x22;https://nodejs.org/api/http.html#http_http_request_options_callback&#x22;,
+  &#x22;!doc&#x22;: &#x22;Node maintains several connections per server to make HTTP requests. This function allows one to transparently
+ issue requests.&#x22;
+},
+get: {
+  &#x22;!type&#x22;: &#x22;fn(options: ?, callback?: fn(res: +http.IncomingMessage)) -&#x3e; +http.ClientRequest&#x22;,
+  &#x22;!url&#x22;: &#x22;https://nodejs.org/api/http.html#http_http_get_options_callback&#x22;,
+  &#x22;!doc&#x22;: &#x22;Since most requests are GET requests without bodies, Node provides this convenience method. The only difference
+ between this method and http.<span class="apidocCodeKeywordSpan">request</span>() is that it sets the method to GET and calls req
+.end() automatically.&#x22;
+},
+globalAgent: {
+  &#x22;!type&#x22;: &#x22;+http.Agent&#x22;,
+  &#x22;!url&#x22;: &#x22;https://nodejs.org/api/http.html#http_http_globalagent&#x22;,
+  &#x22;!doc&#x22;: &#x22;Global instance of Agent which is used as the default for all http client requests.&#x22;
+},
+Agent: {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.reset" id="apidoc.element.tern.Server.prototype.reset">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>reset
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">reset = function () {
+  this.signal(&#x22;reset&#x22;);
+  this.cx = new infer.Context(this.defs, this);
+  this.uses = 0;
+  this.budgets = Object.create(null);
+  for (var i = 0; i &#x3c; this.files.length; ++i) {
+    var file = this.files[i];
+    if (file.scope) {
+      infer.clearScopes(file.ast);
+      file.scope = null;
+    }
+  }
+  this.signal(&#x22;postReset&#x22;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.signal" id="apidoc.element.tern.Server.prototype.signal">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>signal
+        <span class="apidocSignatureSpan">(type, a1, a2, a3, a4)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function signal(type, a1, a2, a3, a4) {
+  var arr = getHandlers(this, type)
+  for (var i = 0; i &#x3c; arr.length; ++i) arr[i].call(this, a1, a2, a3, a4)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+})(this, function(exports, infer) {
+  &#x22;use strict&#x22;;
+
+  exports.condense = function(origins, name, options) {
+if (typeof origins == &#x22;string&#x22;) origins = [origins];
+var state = new State(origins, name || origins[0], options || {});
+
+state.server.<span class="apidocCodeKeywordSpan">signal</span>(&#x22;preCondenseReach&#x22;, state)
+
+state.cx.topScope.path = &#x22;&#x3c;top&#x3e;&#x22;;
+state.cx.topScope.reached(&#x22;&#x22;, state);
+for (var path in state.roots)
+  reach(state.roots[path], null, path, state);
+for (var i = 0; i &#x3c; state.patchUp.length; ++i)
+  patchUpSimpleInstance(state.patchUp[i], state);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.signalReturnFirst" id="apidoc.element.tern.Server.prototype.signalReturnFirst">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>signalReturnFirst
+        <span class="apidocSignatureSpan">(type, a1, a2, a3, a4)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function signalReturnFirst(type, a1, a2, a3, a4) {
+  var arr = getHandlers(this, type)
+  for (var i = 0; i &#x3c; arr.length; ++i) {
+    var result = arr[i].call(this, a1, a2, a3, a4)
+    if (result) return result
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.Server.prototype.startAsyncAction" id="apidoc.element.tern.Server.prototype.startAsyncAction">
+        function <span class="apidocSignatureSpan">tern.Server.prototype.</span>startAsyncAction
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">startAsyncAction = function () {
+  ++this.pending;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.comment" id="apidoc.module.tern.comment">module tern.comment</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.comment.commentAfter" id="apidoc.element.tern.comment.commentAfter">
+        function <span class="apidocSignatureSpan">tern.comment.</span>commentAfter
+        <span class="apidocSignatureSpan">(text, pos)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">commentAfter = function (text, pos) {
+  while (pos &#x3c; text.length) {
+    var next = text.charCodeAt(pos);
+    if (next == 47) {
+      var after = text.charCodeAt(pos + 1), end;
+      if (after == 47) // line comment
+        end = text.indexOf(&#x22;\n&#x22;, pos + 2);
+      else if (after == 42) // block comment
+        end = text.indexOf(&#x22;*/&#x22;, pos + 2);
+      else
+        return;
+      return text.slice(pos + 2, end &#x3c; 0 ? text.length : end);
+    } else if (isSpace(next)) {
+      ++pos;
+    }
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.comment.commentsBefore" id="apidoc.element.tern.comment.commentsBefore">
+        function <span class="apidocSignatureSpan">tern.comment.</span>commentsBefore
+        <span class="apidocSignatureSpan">(text, pos)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">commentsBefore = function (text, pos) {
+  var found = null, emptyLines = 0, topIsLineComment;
+  out: while (pos &#x3e; 0) {
+    var prev = text.charCodeAt(pos - 1);
+    if (prev == 10) {
+      for (var scan = --pos, sawNonWS = false; scan &#x3e; 0; --scan) {
+        prev = text.charCodeAt(scan - 1);
+        if (prev == 47 &#x26;&#x26; text.charCodeAt(scan - 2) == 47) {
+          if (!onOwnLine(text, scan - 2)) break out;
+          var content = text.slice(scan, pos);
+          if (!emptyLines &#x26;&#x26; topIsLineComment) found[0] = content + &#x22;\n&#x22; + found[0];
+          else (found || (found = [])).unshift(content);
+          topIsLineComment = true;
+          emptyLines = 0;
+          pos = scan - 2;
+          break;
+        } else if (prev == 10) {
+          if (!sawNonWS &#x26;&#x26; ++emptyLines &#x3e; 1) break out;
+          break;
+        } else if (!sawNonWS &#x26;&#x26; !isSpace(prev)) {
+          sawNonWS = true;
+        }
+      }
+    } else if (prev == 47 &#x26;&#x26; text.charCodeAt(pos - 2) == 42) {
+      for (var scan = pos - 2; scan &#x3e; 1; --scan) {
+        if (text.charCodeAt(scan - 1) == 42 &#x26;&#x26; text.charCodeAt(scan - 2) == 47) {
+          if (!onOwnLine(text, scan - 2)) break out;
+          (found || (found = [])).unshift(text.slice(scan, pos - 2));
+          topIsLineComment = false;
+          emptyLines = 0;
+          break;
+        }
+      }
+      pos = scan - 2;
+    } else if (isSpace(prev)) {
+      --pos;
+    } else {
+      break;
+    }
+  }
+  return found;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        ++pos;
+      }
+    }
+  };
+
+  exports.ensureCommentsBefore = function(text, node) {
+    if (node.hasOwnProperty(&#x22;commentsBefore&#x22;)) return node.commentsBefore;
+    return node.commentsBefore = exports.<span class="apidocCodeKeywordSpan">commentsBefore</span>(text, node.start);
+  };
+});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.comment.ensureCommentsBefore" id="apidoc.element.tern.comment.ensureCommentsBefore">
+        function <span class="apidocSignatureSpan">tern.comment.</span>ensureCommentsBefore
+        <span class="apidocSignatureSpan">(text, node)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ensureCommentsBefore = function (text, node) {
+  if (node.hasOwnProperty(&#x22;commentsBefore&#x22;)) return node.commentsBefore;
+  return node.commentsBefore = exports.commentsBefore(text, node.start);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.condense" id="apidoc.module.tern.condense">module tern.condense</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.condense.condense" id="apidoc.element.tern.condense.condense">
+        function <span class="apidocSignatureSpan">tern.</span>condense
+        <span class="apidocSignatureSpan">(origins, name, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">condense = function (origins, name, options) {
+  if (typeof origins == &#x22;string&#x22;) origins = [origins];
+  var state = new State(origins, name || origins[0], options || {});
+
+  state.server.signal(&#x22;preCondenseReach&#x22;, state)
+
+  state.cx.topScope.path = &#x22;&#x3c;top&#x3e;&#x22;;
+  state.cx.topScope.reached(&#x22;&#x22;, state);
+  for (var path in state.roots)
+    reach(state.roots[path], null, path, state);
+  for (var i = 0; i &#x3c; state.patchUp.length; ++i)
+    patchUpSimpleInstance(state.patchUp[i], state);
+
+  state.server.signal(&#x22;postCondenseReach&#x22;, state)
+
+  for (var path in state.types)
+    store(createPath(path.split(&#x22;.&#x22;), state), state.types[path], state);
+  for (var path in state.altPaths)
+    storeAlt(path, state.altPaths[path], state);
+  var hasDef = false;
+  for (var _def in state.output[&#x22;!define&#x22;]) { hasDef = true; break; }
+  if (!hasDef) delete state.output[&#x22;!define&#x22;];
+
+  state.server.signal(&#x22;postCondense&#x22;, state)
+
+  return simplify(state.output, state.options.sortOutput);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.def" id="apidoc.module.tern.def">module tern.def</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.def.init" id="apidoc.element.tern.def.init">
+        function <span class="apidocSignatureSpan">tern.def.</span>init
+        <span class="apidocSignatureSpan">(exports, infer)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function (exports, infer) {
+  &#x22;use strict&#x22;;
+
+  function hop(obj, prop) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+  }
+
+  var TypeParser = exports.TypeParser = function(spec, start, base, forceNew) {
+    this.pos = start || 0;
+    this.spec = spec;
+    this.base = base;
+    this.forceNew = forceNew;
+  };
+
+  function unwrapType(type, self, args) {
+    return type.call ? type(self, args) : type;
+  }
+
+  function extractProp(type, prop) {
+    if (prop == &#x22;!ret&#x22;) {
+      if (type.retval) return type.retval;
+      var rv = new infer.AVal;
+      type.propagate(new infer.IsCallee(infer.ANull, [], null, rv));
+      return rv;
+    } else {
+      return type.getProp(prop);
+    }
+  }
+
+  function computedFunc(name, args, retType, generator) {
+    return function(self, cArgs) {
+      var realArgs = [];
+      for (var i = 0; i &#x3c; args.length; i++) realArgs.push(unwrapType(args[i], self, cArgs));
+      return new infer.Fn(name, infer.ANull, realArgs, unwrapType(retType, self, cArgs), generator);
+    };
+  }
+  function computedUnion(types) {
+    return function(self, args) {
+      var union = new infer.AVal;
+      for (var i = 0; i &#x3c; types.length; i++) unwrapType(types[i], self, args).propagate(union);
+      union.maxWeight = 1e5;
+      return union;
+    };
+  }
+  function computedArray(inner) {
+    return function(self, args) {
+      return new infer.Arr(inner(self, args));
+    };
+  }
+  function computedTuple(types) {
+    return function(self, args) {
+      return new infer.Arr(types.map(function(tp) { return unwrapType(tp, self, args) }))
+    }
+  }
+  function computedObject(names, types) {
+    return function(self, args) {
+      var obj = new infer.Obj;
+      names.forEach(function (prop, i) {
+        obj.defProp(prop).addType(unwrapType(types[i], self, args));
+      });
+      return obj;
+    };
+  }
+
+  TypeParser.prototype = {
+    eat: function(str) {
+      if (str.length == 1 ? this.spec.charAt(this.pos) == str : this.spec.indexOf(str, this.pos) == this.pos) {
+        this.pos += str.length;
+        return true;
+      }
+    },
+    word: function(re) {
+      var word = &#x22;&#x22;, ch, re = re || /[\w$]/;
+      while ((ch = this.spec.charAt(this.pos)) &#x26;&#x26; re.test(ch)) { word += ch; ++this.pos; }
+      return word;
+    },
+    error: function() {
+      throw new Error(&#x22;Unrecognized type spec: &#x22; + this.spec + &#x22; (at &#x22; + this.pos + &#x22;)&#x22;);
+    },
+    parseFnType: function(comp, name, top, generator) {
+      var args = [], names = [], computed = false;
+      if (!this.eat(&#x22;)&#x22;)) for (var i = 0; ; ++i) {
+        var colon = this.spec.indexOf(&#x22;: &#x22;, this.pos), argname;
+        if (colon != -1) {
+          argname = this.spec.slice(this.pos, colon);
+          if (/^(\.\.\.)?[$\w?]+$/.test(argname))
+            this.pos = colon + 2;
+          else
+            argname = null;
+        }
+        names.push(argname);
+        var argType = this.parseType(comp);
+        if (argType.call) computed = true;
+        args.push(argType);
+        if (!this.eat(&#x22;, &#x22;)) {
+          this.eat(&#x22;)&#x22;) || this.error();
+          break;
+        }
+      }
+      var retType, computeRet, computeRetStart, fn;
+      if (this.eat(&#x22; -&#x3e; &#x22;)) {
+        var retStart = this.pos;
+        retType = this.parseType(true);
+        if (retType.call &#x26;&#x26; !computed) {
+          computeRet = retType;
+          retType = infer.ANull;
+          computeRetStart = retStart;
+        }
+      } else {
+        retType = infer.ANull;
+      }
+      if (computed) return computedFunc(name, args, retType, generator);
+
+      if (top &#x26;&#x26; (fn = this.base))
+        infer.Fn.call(this.base, name, infer.ANull, args, names, retType, generator);
+      else
+        fn = new infer.Fn(name, infer.ANull, args, names, retType, generator);
+      if (computeRet) fn.computeRet = computeRet;
+      if (computeRetStart != null) fn.computeRetSource = this.spec.slice(computeRetStart, this.pos);
+      return fn;
+    },
+    parseType: function(comp, name, top) {
+      var main = this.parseTypeMaybeProp(comp, name, top);
+      if (!this.eat(&#x22;|&#x22;)) return main;
+      var types = [main], computed = main.call;
+      for (;;) { ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var scope = scopeAt(ast, pos, defaultScope);
+    scope.gatherProperties(f, 0);
+  };
+
+  // INIT DEF MODULE
+
+  // Delayed initialization because of cyclic dependencies.
+  def = exports.def = def.<span class="apidocCodeKeywordSpan">init</span>({}, exports);
+});
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.defaultOptions" id="apidoc.module.tern.defaultOptions">module tern.defaultOptions</a></h1>
+
+
+
+
+
+
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.defaultOptions.getFile" id="apidoc.element.tern.defaultOptions.getFile">
+        function <span class="apidocSignatureSpan">tern.defaultOptions.</span>getFile
+        <span class="apidocSignatureSpan">(_f, c)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getFile = function (_f, c) { if (this.async) c(null, null); }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.defaultOptions.normalizeFilename" id="apidoc.element.tern.defaultOptions.normalizeFilename">
+        function <span class="apidocSignatureSpan">tern.defaultOptions.</span>normalizeFilename
+        <span class="apidocSignatureSpan">(name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">normalizeFilename = function (name) { return name }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var base = endSlash ? word : path.dirname(word) + &#x22;/&#x22;
+  var filePart = endSlash ? &#x22;&#x22; : path.basename(word)
+
+  var me = this
+  fs.readdirSync(dir).forEach(function(file) {
+    if (/^\./.test(file)) return
+    if (filter(filePart, file, query)) {
+      var projectPath = me.server.<span class="apidocCodeKeywordSpan">normalizeFilename</span>(path.relative(pDir, path.resolve(
+dir, file)))
+      if (projectPath == parentFile) return
+      var value = me.modules[projectPath]
+      if (/\.js$/.test(file)) file = file.slice(0, file.length - 3)
+      tern.addCompletion(query, completions, base + file, value)
+    }
+  })
+}
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.infer" id="apidoc.module.tern.infer">module tern.infer</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.AVal" id="apidoc.element.tern.infer.AVal">
+        function <span class="apidocSignatureSpan">tern.infer.</span>AVal
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">AVal = function () {
+  this.types = [];
+  this.forward = null;
+  this.maxWeight = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Arr" id="apidoc.element.tern.infer.Arr">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Arr
+        <span class="apidocSignatureSpan">(contentType)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Arr = function (contentType) {
+  Obj.call(this, cx.protos.Array)
+  var content = this.defProp(&#x22;&#x3c;i&#x3e;&#x22;)
+  if (Array.isArray(contentType)) {
+    this.tuple = contentType.length
+    for (var i = 0; i &#x3c; contentType.length; i++) {
+      var prop = this.defProp(String(i))
+      contentType[i].propagate(prop)
+      prop.propagate(content)
+    }
+  } else if (contentType) {
+    this.tuple = 0
+    contentType.propagate(content)
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    for (var i = 0; i &#x3c; types.length; i++) unwrapType(types[i], self, args).propagate(union);
+    union.maxWeight = 1e5;
+    return union;
+  };
+}
+function computedArray(inner) {
+  return function(self, args) {
+    return new infer.<span class="apidocCodeKeywordSpan">Arr</span>(inner(self, args));
+  };
+}
+function computedTuple(types) {
+  return function(self, args) {
+    return new infer.Arr(types.map(function(tp) { return unwrapType(tp, self, args) }))
+  }
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Context" id="apidoc.element.tern.infer.Context">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Context
+        <span class="apidocSignatureSpan">(defs, parent)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Context = function (defs, parent) {
+  this.parent = parent;
+  this.props = Object.create(null);
+  this.protos = Object.create(null);
+  this.origins = [];
+  this.curOrigin = &#x22;ecmascript&#x22;;
+  this.paths = Object.create(null);
+  this.definitions = Object.create(null);
+  this.purgeGen = 0;
+  this.workList = null;
+  this.disabledComputing = null;
+  this.curSuperCtor = this.curSuper = null;
+  this.symbols = Object.create(null)
+
+  exports.withContext(this, function() {
+    cx.protos.Object = new Obj(null, &#x22;Object.prototype&#x22;);
+    cx.topScope = new Scope();
+    cx.topScope.name = &#x22;&#x3c;top&#x3e;&#x22;;
+    cx.protos.Array = new Obj(true, &#x22;Array.prototype&#x22;);
+    cx.protos.Function = new Fn(&#x22;Function.prototype&#x22;, ANull, [], [], ANull);
+    cx.protos.Function.proto = cx.protos.Object;
+    cx.protos.RegExp = new Obj(true, &#x22;RegExp.prototype&#x22;);
+    cx.protos.String = new Obj(true, &#x22;String.prototype&#x22;);
+    cx.protos.Number = new Obj(true, &#x22;Number.prototype&#x22;);
+    cx.protos.Boolean = new Obj(true, &#x22;Boolean.prototype&#x22;);
+    cx.protos.Symbol = new Obj(true, &#x22;Symbol.prototype&#x22;);
+    cx.str = new Prim(cx.protos.String, &#x22;string&#x22;);
+    cx.bool = new Prim(cx.protos.Boolean, &#x22;bool&#x22;);
+    cx.num = new Prim(cx.protos.Number, &#x22;number&#x22;);
+    cx.curOrigin = null;
+
+    if (defs) for (var i = 0; i &#x3c; defs.length; ++i)
+      def.load(defs[i]);
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.DefProp" id="apidoc.element.tern.infer.DefProp">
+        function <span class="apidocSignatureSpan">tern.infer.</span>DefProp
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">DefProp = function () {
+  this.origin = cx.curOrigin;
+  this.construct.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var getFrom = p.parseType(true);
+    p.eat(&#x22; &#x22;);
+    var getTo = p.parseType(true);
+    addEffect(fn, function(self, args) {
+      var from = unwrapType(getFrom, self, args), to = unwrapType(getTo, self, args);
+      from.forAllProps(function(prop, val, local) {
+        if (local &#x26;&#x26; prop != &#x22;&#x3c;i&#x3e;&#x22;)
+          to.propagate(new infer.<span class="apidocCodeKeywordSpan">DefProp</span>(prop, val));
+      });
+    });
+  } else {
+    throw new Error(&#x22;Unknown effect type: &#x22; + effect);
+  }
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Fn" id="apidoc.element.tern.infer.Fn">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Fn
+        <span class="apidocSignatureSpan">(name, self, args, argNames, retval, generator)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Fn = function (name, self, args, argNames, retval, generator) {
+  Obj.call(this, cx.protos.Function, name);
+  this.self = self;
+  this.args = args;
+  this.argNames = argNames;
+  this.retval = retval;
+  this.generator = generator
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  }
+}
+
+function computedFunc(name, args, retType, generator) {
+  return function(self, cArgs) {
+    var realArgs = [];
+    for (var i = 0; i &#x3c; args.length; i++) realArgs.push(unwrapType(args[i], self, cArgs));
+    return new infer.<span class="apidocCodeKeywordSpan">Fn</span>(name, infer.ANull, realArgs, unwrapType(retType, self, cArgs),
+generator);
+  };
+}
+function computedUnion(types) {
+  return function(self, args) {
+    var union = new infer.AVal;
+    for (var i = 0; i &#x3c; types.length; i++) unwrapType(types[i], self, args).propagate(union);
+    union.maxWeight = 1e5;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.IfObj" id="apidoc.element.tern.infer.IfObj">
+        function <span class="apidocSignatureSpan">tern.infer.</span>IfObj
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">IfObj = function () {
+  this.origin = cx.curOrigin;
+  this.construct.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      fnType = last.scope.fnType;
+  }
+  var result = new infer.AVal;
+  if (asNew) {
+    var self = new infer.AVal;
+    fnType.propagate(new infer.IsCtor(self));
+    self.propagate(result, 90);
+    fnType.propagate(new infer.IsCallee(self, deps, null, new infer.<span class="apidocCodeKeywordSpan">IfObj</span>(result)));
+  } else {
+    fnType.propagate(new infer.IsCallee(infer.cx().topScope, deps, null, result));
+  }
+  return result;
+}
+
+infer.registerFunction(&#x22;angular_callInject&#x22;, function(argN) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.IsCallee" id="apidoc.element.tern.infer.IsCallee">
+        function <span class="apidocSignatureSpan">tern.infer.</span>IsCallee
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">IsCallee = function () {
+  this.origin = cx.curOrigin;
+  this.construct.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return type.call ? type(self, args) : type;
+}
+
+function extractProp(type, prop) {
+  if (prop == &#x22;!ret&#x22;) {
+    if (type.retval) return type.retval;
+    var rv = new infer.AVal;
+    type.propagate(new infer.<span class="apidocCodeKeywordSpan">IsCallee</span>(infer.ANull, [], null, rv));
+    return rv;
+  } else {
+    return type.getProp(prop);
+  }
+}
+
+function computedFunc(name, args, retType, generator) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.IsCtor" id="apidoc.element.tern.infer.IsCtor">
+        function <span class="apidocSignatureSpan">tern.infer.</span>IsCtor
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">IsCtor = function () {
+  this.origin = cx.curOrigin;
+  this.construct.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var last = node.elements[node.elements.length - 1];
+    if (last &#x26;&#x26; /FunctionExpression/.test(last.type))
+      fnType = last.scope.fnType;
+  }
+  var result = new infer.AVal;
+  if (asNew) {
+    var self = new infer.AVal;
+    fnType.propagate(new infer.<span class="apidocCodeKeywordSpan">IsCtor</span>(self));
+    self.propagate(result, 90);
+    fnType.propagate(new infer.IsCallee(self, deps, null, new infer.IfObj(result)));
+  } else {
+    fnType.propagate(new infer.IsCallee(infer.cx().topScope, deps, null, result));
+  }
+  return result;
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.IsProto" id="apidoc.element.tern.infer.IsProto">
+        function <span class="apidocSignatureSpan">tern.infer.</span>IsProto
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">IsProto = function () {
+  this.origin = cx.curOrigin;
+  this.construct.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Obj" id="apidoc.element.tern.infer.Obj">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Obj
+        <span class="apidocSignatureSpan">(proto, name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Obj = function (proto, name) {
+  if (!this.props) this.props = Object.create(null);
+  this.proto = proto === true ? cx.protos.Object : proto;
+  if (proto &#x26;&#x26; proto != cx.protos.Object &#x26;&#x26; !name &#x26;&#x26; proto.name &#x26;&#x26; !(this instanceof Fn)) {
+    var match = /^(.*)\.prototype$/.exec(this.proto.name);
+    if (match) name = match[1];
+  }
+  this.name = name;
+  this.maybeProps = null;
+  this.origin = cx.curOrigin;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (comp &#x26;&#x26; this.eat(&#x22;[&#x22;)) return this.parsePoly(base);
+  if (top &#x26;&#x26; this.base) {
+    this.base.proto = base
+    var name = base.hasCtor &#x26;&#x26; base.hasCtor.name || base.name
+    if (name) this.base.name = name
+    return this.base
+  }
+  if (top &#x26;&#x26; this.forceNew) return new infer.<span class="apidocCodeKeywordSpan">Obj</span>(base);
+  return infer.getInstance(base);
+} else if (this.eat(&#x22;:&#x22;)) {
+  var name = this.word(/[\w$\.]/)
+  return infer.getSymbol(name)
+} else if (comp &#x26;&#x26; this.eat(&#x22;!&#x22;)) {
+  var arg = this.word(/\d/);
+  if (arg) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Prim" id="apidoc.element.tern.infer.Prim">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Prim
+        <span class="apidocSignatureSpan">(proto, name)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Prim = function (proto, name) { this.name = name; this.proto = proto; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.PropHasSubset" id="apidoc.element.tern.infer.PropHasSubset">
+        function <span class="apidocSignatureSpan">tern.infer.</span>PropHasSubset
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">PropHasSubset = function () {
+  this.origin = cx.curOrigin;
+  this.construct.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Scope" id="apidoc.element.tern.infer.Scope">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Scope
+        <span class="apidocSignatureSpan">(prev, originNode, isBlock, isCatch)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Scope = function (prev, originNode, isBlock, isCatch) {
+  Obj.call(this, prev || true);
+  this.prev = prev;
+  this.originNode = originNode
+  this.isBlock = !!isBlock
+  this.isCatch = !!isCatch
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+this.modNameTests = []
+this.importTests = []
+this.completableTypes = Object.create(null)
+  }
+
+  Modules.prototype = signal.mixin({
+buildWrappingScope: function(parent, origin, node) {
+  var scope = new infer.<span class="apidocCodeKeywordSpan">Scope</span>(parent, node)
+  scope.origin = origin
+  this.signal(&#x22;wrapScope&#x22;, scope)
+  return scope
+},
+
+maybeOverride: function(name) {
+  if (!this.options.modules || !this.options.modules.hasOwnProperty(name))
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Sym" id="apidoc.element.tern.infer.Sym">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Sym
+        <span class="apidocSignatureSpan">(name, originNode)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Sym = function (name, originNode) {
+  Prim.call(this, cx.protos.Symbol, &#x22;Symbol&#x22;)
+  this.symName = name
+  this.originNode = originNode
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.TimedOut" id="apidoc.element.tern.infer.TimedOut">
+        function <span class="apidocSignatureSpan">tern.infer.</span>TimedOut
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">TimedOut = function () {
+  this.message = &#x22;Timed out&#x22;;
+  this.stack = (new Error()).stack;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var add = cx.workList = function(type, target, weight) {
+    if (depth &#x3c; baseMaxWorkDepth - reduceMaxWorkDepth * list.length)
+      list.push(type, target, weight, depth);
+  };
+  var ret = f(add);
+  for (var i = 0; i &#x3c; list.length; i += 4) {
+    if (timeout &#x26;&#x26; +new Date &#x3e;= timeout)
+      throw new exports.<span class="apidocCodeKeywordSpan">TimedOut</span>();
+    depth = list[i + 3] + 1;
+    list[i + 1].addType(list[i], list[i + 2]);
+  }
+  cx.workList = null;
+  return ret;
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.Type" id="apidoc.element.tern.infer.Type">
+        function <span class="apidocSignatureSpan">tern.infer.</span>Type
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">Type = function () {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.addOrigin" id="apidoc.element.tern.infer.addOrigin">
+        function <span class="apidocSignatureSpan">tern.infer.</span>addOrigin
+        <span class="apidocSignatureSpan">(origin)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addOrigin = function (origin) {
+  if (cx.origins.indexOf(origin) &#x3c; 0) cx.origins.push(origin);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+if (spec[&#x22;!span&#x22;]) type.span = spec[&#x22;!span&#x22;];
+if (spec[&#x22;!data&#x22;]) type.metaData = spec[&#x22;!data&#x22;];
+  }
+
+  function doLoadEnvironment(data, scope) {
+var cx = infer.cx(), server = cx.parent
+
+infer.<span class="apidocCodeKeywordSpan">addOrigin</span>(cx.curOrigin = data[&#x22;!name&#x22;] || &#x22;env#&#x22; + cx.origins
+.length);
+cx.localDefs = cx.definitions[cx.curOrigin] = Object.create(null);
+
+if (server) server.signal(&#x22;preLoadDef&#x22;, data)
+
+passOne(scope, data);
+
+var def = data[&#x22;!define&#x22;];
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.analyze" id="apidoc.element.tern.infer.analyze">
+        function <span class="apidocSignatureSpan">tern.infer.</span>analyze
+        <span class="apidocSignatureSpan">(ast, name, scope)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">analyze = function (ast, name, scope) {
+  if (typeof ast == &#x22;string&#x22;) ast = parse(ast);
+
+  if (!name) name = &#x22;file#&#x22; + cx.origins.length;
+  exports.addOrigin(cx.curOrigin = name);
+
+  if (!scope) scope = cx.topScope;
+  cx.startAnalysis();
+
+  walk.recursive(ast, scope, null, scopeGatherer);
+  if (cx.parent) cx.parent.signal(&#x22;preInfer&#x22;, ast, scope)
+  walk.recursive(ast, scope, null, inferWrapper);
+  if (cx.parent) cx.parent.signal(&#x22;postInfer&#x22;, ast, scope)
+
+  cx.curOrigin = null;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.clearScopes" id="apidoc.element.tern.infer.clearScopes">
+        function <span class="apidocSignatureSpan">tern.infer.</span>clearScopes
+        <span class="apidocSignatureSpan">(ast)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">clearScopes = function (ast) {
+  walk.simple(ast, scopeClearer)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.constraint" id="apidoc.element.tern.infer.constraint">
+        function <span class="apidocSignatureSpan">tern.infer.</span>constraint
+        <span class="apidocSignatureSpan">(methods)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">constraint = function (methods) {
+  var ctor = function() {
+    this.origin = cx.curOrigin;
+    this.construct.apply(this, arguments);
+  };
+  ctor.prototype = Object.create(ANull);
+  for (var m in methods) if (methods.hasOwnProperty(m)) ctor.prototype[m] = methods[m];
+  return ctor;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+// Used to register custom logic for more involved effect or type
+// computation.
+var customFunctions = Object.create(null);
+infer.registerFunction = function(name, f) { customFunctions[name] = f; };
+
+var IsCreated = infer.<span class="apidocCodeKeywordSpan">constraint</span>({
+  construct: function(created, target, spec) {
+    this.created = created;
+    this.target = target;
+    this.spec = spec;
+  },
+  addType: function(tp) {
+    if (tp instanceof infer.Obj &#x26;&#x26; this.created++ &#x3c; 5) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.cx" id="apidoc.element.tern.infer.cx">
+        function <span class="apidocSignatureSpan">tern.infer.</span>cx
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">cx = function () { return cx; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  state.server.signal(&#x22;postCondense&#x22;, state)
+
+  return simplify(state.output, state.options.sortOutput);
+};
+
+function State(origins, name, options) {
+  this.origins = origins;
+  this.cx = infer.<span class="apidocCodeKeywordSpan">cx</span>();
+  this.server = options.server || this.cx.parent || {signal: function() {}}
+  this.maxOrigin = -Infinity;
+  for (var i = 0; i &#x3c; origins.length; ++i)
+    this.maxOrigin = Math.max(this.maxOrigin, this.cx.origins.indexOf(origins[i]));
+  this.output = {&#x22;!name&#x22;: name, &#x22;!define&#x22;: {}};
+  this.options = options;
+  this.types = Object.create(null);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.didGuess" id="apidoc.element.tern.infer.didGuess">
+        function <span class="apidocSignatureSpan">tern.infer.</span>didGuess
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">didGuess = function () { return guessing; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.expressionType" id="apidoc.element.tern.infer.expressionType">
+        function <span class="apidocSignatureSpan">tern.infer.</span>expressionType
+        <span class="apidocSignatureSpan">(found)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">expressionType = function (found) {
+  return findType(found.node, found.state);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+exports.typeFromContext = function(ast, found) {
+  var parent = exports.parentNode(found.node, ast);
+  var type = null;
+  if (findTypeFromContext.hasOwnProperty(parent.type)) {
+    var finder = findTypeFromContext[parent.type];
+    type = finder &#x26;&#x26; finder(parent, found.node, function(node, fromContext) {
+      var obj = {node: node, state: found.state};
+      var tp = fromContext ? exports.typeFromContext(ast, obj) : exports.<span class="apidocCodeKeywordSpan">expressionType</span
+>(obj);
+      return tp || ANull;
+    });
+  }
+  return type || exports.expressionType(found);
+};
+
+// Flag used to indicate that some wild guessing was used to produce
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.findExpressionAround" id="apidoc.element.tern.infer.findExpressionAround">
+        function <span class="apidocSignatureSpan">tern.infer.</span>findExpressionAround
+        <span class="apidocSignatureSpan">(ast, start, end, defaultScope, filter)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findExpressionAround = function (ast, start, end, defaultScope, filter) {
+  var test = filter || function(_t, node) {
+    if (start != null &#x26;&#x26; node.start &#x3e; start) return false;
+    if (node.type == &#x22;Identifier&#x22; &#x26;&#x26; node.name == &#x22;✖&#x22;) return false;
+    return typeFinder.hasOwnProperty(node.type);
+  };
+  return walk.findNodeAround(ast, end, test, searchVisitor, defaultScope || cx.topScope);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var arg = node.arguments[0]
+  if (arg &#x26;&#x26; arg.type == &#x22;Literal&#x22; &#x26;&#x26; typeof arg.value == &#x22;string&#x22;) return arg.value
+}
+
+function isModuleName(node) {
+  if (node.type != &#x22;Literal&#x22; || typeof node.value != &#x22;string&#x22;) return
+
+  var call = infer.<span class="apidocCodeKeywordSpan">findExpressionAround</span>(node.sourceFile.ast, null, node.end, null,
+                                        function(_, n) { return isStaticRequire(n) != null })
+  if (call &#x26;&#x26; call.node.arguments[0] == node) return node.value
+}
+
+function isImport(node) {
+  if (node.type != &#x22;Identifier&#x22;) return
+  var decl = infer.findExpressionAround(node.sourceFile.ast, null, node.end, null, &#x22;VariableDeclarator&#x22;), name
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.findExpressionAt" id="apidoc.element.tern.infer.findExpressionAt">
+        function <span class="apidocSignatureSpan">tern.infer.</span>findExpressionAt
+        <span class="apidocSignatureSpan">(ast, start, end, defaultScope, filter)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findExpressionAt = function (ast, start, end, defaultScope, filter) {
+  var test = filter || function(_t, node) {
+    if (node.type == &#x22;Identifier&#x22; &#x26;&#x26; node.name == &#x22;✖&#x22;) return false;
+    return typeFinder.hasOwnProperty(node.type);
+  };
+  return walk.findNodeAt(ast, start, end, test, searchVisitor, defaultScope || cx.topScope);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.findPropRefs" id="apidoc.element.tern.infer.findPropRefs">
+        function <span class="apidocSignatureSpan">tern.infer.</span>findPropRefs
+        <span class="apidocSignatureSpan">(ast, scope, objType, name, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findPropRefs = function (ast, scope, objType, name, f) {
+  // Find the type which owns the property in hierarchy
+  while (objType &#x26;&#x26; !objType.props[name] &#x26;&#x26; !(objType.maybeProps &#x26;&#x26; objType.maybeProps[name])) {
+    objType = objType.proto;
+  }
+  if (!objType) throw new Error(&#x22;Couldn&#x27;t locate property in the base object type.&#x22;);
+
+  function isObjTypeProto(type) {
+    // Check whether the found type has objType in its hierarchy
+    while (type &#x26;&#x26; type != objType) {
+      // Ff property is overriden higher in the hierarchy, return false
+      if (type.props[name] || (type.maybeProps &#x26;&#x26; type.maybeProps[name])) {
+        return false;
+      }
+      type = type.proto;
+    }
+    return type;
+  }
+
+  walk.simple(ast, {
+    MemberExpression: function(node, scope) {
+      if (node.computed || propName(node) != name) return;
+      if (isObjTypeProto(findType(node.object, scope).getType())) f(node.property, scope);
+    },
+    ObjectExpression: function(node, scope) {
+      if (findType(node, scope).getType() != objType) return;
+      for (var i = 0; i &#x3c; node.properties.length; ++i)
+        if (propName(node.properties[i]) == name) f(node.properties[i].key, scope);
+    },
+    MethodDefinition: function(node) {
+      if (propName(node) != name) return;
+      if (node.value &#x26;&#x26; isObjTypeProto(getThis(node.value.scope).getType())) f(node.key, node.value.scope);
+    }
+  }, simpleWalker, scope);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.findRefs" id="apidoc.element.tern.infer.findRefs">
+        function <span class="apidocSignatureSpan">tern.infer.</span>findRefs
+        <span class="apidocSignatureSpan">(ast, baseScope, name, refScope, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">findRefs = function (ast, baseScope, name, refScope, f) {
+  function handleId(node, scope, ancestors) {
+    if (node.name != name ||
+        (node == ast.id &#x26;&#x26; ast.type == &#x22;FunctionDeclaration&#x22;)) return;
+    for (var s = scope; s; s = s.prev) {
+      if (s == refScope) f(node, scope, ancestors);
+      if (name in s.props) return;
+    }
+  }
+  walk.ancestor(ast, {Identifier: handleId, VariablePattern: handleId},
+                exports.fullVisitor, baseScope)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.forAllLocalsAt" id="apidoc.element.tern.infer.forAllLocalsAt">
+        function <span class="apidocSignatureSpan">tern.infer.</span>forAllLocalsAt
+        <span class="apidocSignatureSpan">(ast, pos, defaultScope, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">forAllLocalsAt = function (ast, pos, defaultScope, f) {
+  var scope = scopeAt(ast, pos, defaultScope);
+  scope.gatherProperties(f, 0);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.forAllPropertiesOf" id="apidoc.element.tern.infer.forAllPropertiesOf">
+        function <span class="apidocSignatureSpan">tern.infer.</span>forAllPropertiesOf
+        <span class="apidocSignatureSpan">(type, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">forAllPropertiesOf = function (type, f) {
+  type.gatherProperties(f, 0);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  function findImportCompletions(me, file, query, node, imp, wordEnd) {
+var completions = []
+var word = node.name ? node.name.slice(0, wordEnd - node.start) : &#x22;&#x22;
+if (query.caseInsensitive) word = word.toLowerCase()
+
+var modType = me.resolveModule(imp.name, node.sourceFile.name).getType()
+if (!modType) return null
+infer.<span class="apidocCodeKeywordSpan">forAllPropertiesOf</span>(modType, function(prop, obj, depth) {
+  if (obj == infer.cx().protos.Object) return
+  if (query.filter !== false &#x26;&#x26; word &#x26;&#x26;
+      (query.caseInsensitive ? prop.toLowerCase() : prop).indexOf(word) !== 0) return
+  tern.addCompletion(query, completions, prop, obj &#x26;&#x26; obj.props[prop], depth)
+})
+return {
+  start: tern.outputPos(query, file, node.name ? node.start : wordEnd),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.getInstance" id="apidoc.element.tern.infer.getInstance">
+        function <span class="apidocSignatureSpan">tern.infer.</span>getInstance
+        <span class="apidocSignatureSpan">(obj, ctor)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getInstance = function (obj, ctor) {
+  if (ctor === false) return new Obj(obj);
+
+  if (!ctor) ctor = obj.hasCtor;
+  if (!obj.instances) obj.instances = [];
+  for (var i = 0; i &#x3c; obj.instances.length; ++i) {
+    var cur = obj.instances[i];
+    if (cur.ctor == ctor) return cur.instance;
+  }
+  var instance = new Obj(obj, ctor &#x26;&#x26; ctor.name);
+  instance.origin = obj.origin;
+  obj.instances.push({ctor: ctor, instance: instance});
+  return instance;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (top &#x26;&#x26; this.base) {
+    this.base.proto = base
+    var name = base.hasCtor &#x26;&#x26; base.hasCtor.name || base.name
+    if (name) this.base.name = name
+    return this.base
+  }
+  if (top &#x26;&#x26; this.forceNew) return new infer.Obj(base);
+  return infer.<span class="apidocCodeKeywordSpan">getInstance</span>(base);
+} else if (this.eat(&#x22;:&#x22;)) {
+  var name = this.word(/[\w$\.]/)
+  return infer.getSymbol(name)
+} else if (comp &#x26;&#x26; this.eat(&#x22;!&#x22;)) {
+  var arg = this.word(/\d/);
+  if (arg) {
+    arg = Number(arg);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.getSymbol" id="apidoc.element.tern.infer.getSymbol">
+        function <span class="apidocSignatureSpan">tern.infer.</span>getSymbol
+        <span class="apidocSignatureSpan">(name, originNode)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getSymbol = function (name, originNode) {
+  var cleanName = name.replace(/[^\w$\.]/g, &#x22;_&#x22;)
+  var known = cx.symbols[cleanName]
+  if (known) {
+    if (originNode &#x26;&#x26; !known.originNode) known.originNode = originNode
+    return known
+  }
+  return cx.symbols[cleanName] = new Sym(cleanName, originNode)
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    if (name) this.base.name = name
+    return this.base
+  }
+  if (top &#x26;&#x26; this.forceNew) return new infer.Obj(base);
+  return infer.getInstance(base);
+} else if (this.eat(&#x22;:&#x22;)) {
+  var name = this.word(/[\w$\.]/)
+  return infer.<span class="apidocCodeKeywordSpan">getSymbol</span>(name)
+} else if (comp &#x26;&#x26; this.eat(&#x22;!&#x22;)) {
+  var arg = this.word(/\d/);
+  if (arg) {
+    arg = Number(arg);
+    return function(_self, args) {return args[arg] || infer.ANull;};
+  } else if (this.eat(&#x22;this&#x22;)) {
+    return function(self) {return self;};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.parentNode" id="apidoc.element.tern.infer.parentNode">
+        function <span class="apidocSignatureSpan">tern.infer.</span>parentNode
+        <span class="apidocSignatureSpan">(child, ast)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parentNode = function (child, ast) {
+  var stack = [];
+  function c(node, st, override) {
+    if (node.start &#x3c;= child.start &#x26;&#x26; node.end &#x3e;= child.end) {
+      var top = stack[stack.length - 1];
+      if (node == child) throw {found: top};
+      if (top != node) stack.push(node);
+      walk.base[override || node.type](node, st, c);
+      if (top != node) stack.pop();
+    }
+  }
+  try {
+    c(ast, null);
+  } catch (e) {
+    if (e.found) return e.found;
+    throw e;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  VariableDeclarator: function(parent, node, get) {
+    if (parent.init == node) return get(parent.id)
+  }
+};
+findTypeFromContext.NewExpression = findTypeFromContext.CallExpression
+
+exports.typeFromContext = function(ast, found) {
+  var parent = exports.<span class="apidocCodeKeywordSpan">parentNode</span>(found.node, ast);
+  var type = null;
+  if (findTypeFromContext.hasOwnProperty(parent.type)) {
+    var finder = findTypeFromContext[parent.type];
+    type = finder &#x26;&#x26; finder(parent, found.node, function(node, fromContext) {
+      var obj = {node: node, state: found.state};
+      var tp = fromContext ? exports.typeFromContext(ast, obj) : exports.expressionType(obj);
+      return tp || ANull;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.parse" id="apidoc.element.tern.infer.parse">
+        function <span class="apidocSignatureSpan">tern.infer.</span>parse
+        <span class="apidocSignatureSpan">(text, options, thirdArg)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parse = function (text, options, thirdArg) {
+  if (!options || Array.isArray(options)) options = thirdArg
+  var ast;
+  try { ast = acorn.parse(text, options); }
+  catch(e) { ast = acorn_loose.parse_dammit(text, options); }
+  return ast;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+
+// PARSING
+
+var parse = exports.parse = function(text, options, thirdArg) {
+  if (!options || Array.isArray(options)) options = thirdArg
+  var ast;
+  try { ast = acorn.<span class="apidocCodeKeywordSpan">parse</span>(text, options); }
+  catch(e) { ast = acorn_loose.parse_dammit(text, options); }
+  return ast;
+};
+
+// ANALYSIS INTERFACE
+
+exports.analyze = function(ast, name, scope) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.propName" id="apidoc.element.tern.infer.propName">
+        function <span class="apidocSignatureSpan">tern.infer.</span>propName
+        <span class="apidocSignatureSpan">(node, inferInScope)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">propName = function (node, inferInScope) {
+  var key = node.property || node.key;
+  if (!node.computed &#x26;&#x26; key.type == &#x22;Identifier&#x22;) return key.name;
+  if (key.type == &#x22;Literal&#x22;) {
+    if (typeof key.value == &#x22;string&#x22;) return key.value
+    if (typeof key.value == &#x22;number&#x22;) return String(key.value)
+  }
+  if (inferInScope) {
+    var symName = symbolName(infer(key, inferInScope))
+    if (symName) return node.propName = symName
+  } else if (node.propName) {
+    return node.propName
+  }
+  return &#x22;&#x3c;i&#x3e;&#x22;;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.purge" id="apidoc.element.tern.infer.purge">
+        function <span class="apidocSignatureSpan">tern.infer.</span>purge
+        <span class="apidocSignatureSpan">(origins, start, end)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">purge = function (origins, start, end) {
+  var test = makePredicate(origins, start, end);
+  ++cx.purgeGen;
+  cx.topScope.purge(test);
+  for (var prop in cx.props) {
+    var list = cx.props[prop];
+    for (var i = 0; i &#x3c; list.length; ++i) {
+      var obj = list[i], av = obj.props[prop];
+      if (!av || test(av, av.originNode)) list.splice(i--, 1);
+    }
+    if (!list.length) delete cx.props[prop];
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+// PURGING
+
+exports.purge = function(origins, start, end) {
+  var test = makePredicate(origins, start, end);
+  ++cx.purgeGen;
+  cx.topScope.<span class="apidocCodeKeywordSpan">purge</span>(test);
+  for (var prop in cx.props) {
+    var list = cx.props[prop];
+    for (var i = 0; i &#x3c; list.length; ++i) {
+      var obj = list[i], av = obj.props[prop];
+      if (!av || test(av, av.originNode)) list.splice(i--, 1);
+    }
+    if (!list.length) delete cx.props[prop];
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.registerFunction" id="apidoc.element.tern.infer.registerFunction">
+        function <span class="apidocSignatureSpan">tern.infer.</span>registerFunction
+        <span class="apidocSignatureSpan">(name, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">registerFunction = function (name, f) { customFunctions[name] = f; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        }
+      }
+      this.target.addType(derived);
+    }
+  }
+});
+
+infer.<span class="apidocCodeKeywordSpan">registerFunction</span>(&#x22;Object_create&#x22;, function(_self, args, argNodes) {
+  if (argNodes &#x26;&#x26; argNodes.length &#x26;&#x26; argNodes[0].type == &#x22;Literal&#x22; &#x26;&#x26; argNodes[0].value ==
+null)
+    return new infer.Obj();
+
+  var result = new infer.AVal;
+  if (args[0]) args[0].propagate(new IsCreated(0, result, args[1]));
+  return result;
+});
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.resetGuessing" id="apidoc.element.tern.infer.resetGuessing">
+        function <span class="apidocSignatureSpan">tern.infer.</span>resetGuessing
+        <span class="apidocSignatureSpan">(val)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">resetGuessing = function (val) { guessing = val; }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.scopeAt" id="apidoc.element.tern.infer.scopeAt">
+        function <span class="apidocSignatureSpan">tern.infer.</span>scopeAt
+        <span class="apidocSignatureSpan">(ast, pos, defaultScope)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">scopeAt = function (ast, pos, defaultScope) {
+  var found = walk.findNodeAround(ast, pos, function(_, node) {
+    return node.scope;
+  });
+  if (found) return found.node.scope;
+  else return defaultScope || cx.topScope;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.simplifyTypes" id="apidoc.element.tern.infer.simplifyTypes">
+        function <span class="apidocSignatureSpan">tern.infer.</span>simplifyTypes
+        <span class="apidocSignatureSpan">(types)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">simplifyTypes = function (types) {
+  var found = [];
+  outer: for (var i = 0; i &#x3c; types.length; ++i) {
+    var tp = types[i];
+    for (var j = 0; j &#x3c; found.length; j++) {
+      var similar = similarType(tp, found[j], 0);
+      if (similar) {
+        found[j] = similar;
+        continue outer;
+      }
+    }
+    found.push(tp);
+  }
+  return found;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (isType) typeNameStack.pop();
+  return name;
+}
+
+infer.AVal.prototype.typeName = function() {
+  if (this.types.length == 0) return &#x22;?&#x22;;
+  if (this.types.length == 1) return typeName(this.types[0]);
+  var simplified = infer.<span class="apidocCodeKeywordSpan">simplifyTypes</span>(this.types);
+  if (simplified.length &#x3e; 2) return &#x22;?&#x22;;
+  for (var strs = [], i = 0; i &#x3c; simplified.length; i++)
+    strs.push(typeName(simplified[i]));
+  return strs.join(&#x22;|&#x22;);
+};
+
+infer.ANull.typeName = function() { return &#x22;?&#x22;; };
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.toString" id="apidoc.element.tern.infer.toString">
+        function <span class="apidocSignatureSpan">tern.infer.</span>toString
+        <span class="apidocSignatureSpan">(type, maxDepth, parent)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function (type, maxDepth, parent) {
+  if (!type || type == parent || maxDepth &#x26;&#x26; maxDepth &#x3c; -3) return &#x22;?&#x22;;
+  return type.toString(maxDepth, parent);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return define([&#x22;exports&#x22;, &#x22;acorn/dist/acorn&#x22;, &#x22;acorn/dist/acorn_loose&#x22;, &#x22;acorn/dist/walk&#x22
+;, &#x22;./def&#x22;, &#x22;./signal&#x22;], mod);
+mod(root.tern || (root.tern = {}), acorn, acorn, acorn.walk, tern.def, tern.signal); // Plain browser env
+})(this, function(exports, acorn, acorn_loose, walk, def, signal) {
+&#x22;use strict&#x22;;
+
+var toString = exports.toString = function(type, maxDepth, parent) {
+  if (!type || type == parent || maxDepth &#x26;&#x26; maxDepth &#x3c; -3) return &#x22;?&#x22;;
+  return type.<span class="apidocCodeKeywordSpan">toString</span>(maxDepth, parent);
+};
+
+// A variant of AVal used for unknown, dead-end values. Also serves
+// as prototype for AVals, Types, and Constraints because it
+// implements &#x27;empty&#x27; versions of all the methods that the code
+// expects.
+var ANull = exports.ANull = signal.mixin({
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.typeFromContext" id="apidoc.element.tern.infer.typeFromContext">
+        function <span class="apidocSignatureSpan">tern.infer.</span>typeFromContext
+        <span class="apidocSignatureSpan">(ast, found)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">typeFromContext = function (ast, found) {
+  var parent = exports.parentNode(found.node, ast);
+  var type = null;
+  if (findTypeFromContext.hasOwnProperty(parent.type)) {
+    var finder = findTypeFromContext[parent.type];
+    type = finder &#x26;&#x26; finder(parent, found.node, function(node, fromContext) {
+      var obj = {node: node, state: found.state};
+      var tp = fromContext ? exports.typeFromContext(ast, obj) : exports.expressionType(obj);
+      return tp || ANull;
+    });
+  }
+  return type || exports.expressionType(found);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+exports.typeFromContext = function(ast, found) {
+  var parent = exports.parentNode(found.node, ast);
+  var type = null;
+  if (findTypeFromContext.hasOwnProperty(parent.type)) {
+    var finder = findTypeFromContext[parent.type];
+    type = finder &#x26;&#x26; finder(parent, found.node, function(node, fromContext) {
+      var obj = {node: node, state: found.state};
+      var tp = fromContext ? exports.<span class="apidocCodeKeywordSpan">typeFromContext</span>(ast, obj) : exports.expressionType
+(obj);
+      return tp || ANull;
+    });
+  }
+  return type || exports.expressionType(found);
+};
+
+// Flag used to indicate that some wild guessing was used to produce
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.withContext" id="apidoc.element.tern.infer.withContext">
+        function <span class="apidocSignatureSpan">tern.infer.</span>withContext
+        <span class="apidocSignatureSpan">(context, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">withContext = function (context, f) {
+  var old = cx;
+  cx = context;
+  try { return f(); }
+  finally { cx = old; }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+this.definitions = Object.create(null);
+this.purgeGen = 0;
+this.workList = null;
+this.disabledComputing = null;
+this.curSuperCtor = this.curSuper = null;
+this.symbols = Object.create(null)
+
+exports.<span class="apidocCodeKeywordSpan">withContext</span>(this, function() {
+  cx.protos.Object = new Obj(null, &#x22;Object.prototype&#x22;);
+  cx.topScope = new Scope();
+  cx.topScope.name = &#x22;&#x3c;top&#x3e;&#x22;;
+  cx.protos.Array = new Obj(true, &#x22;Array.prototype&#x22;);
+  cx.protos.Function = new Fn(&#x22;Function.prototype&#x22;, ANull, [], [], ANull);
+  cx.protos.Function.proto = cx.protos.Object;
+  cx.protos.RegExp = new Obj(true, &#x22;RegExp.prototype&#x22;);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.tern.infer.withTimeout" id="apidoc.element.tern.infer.withTimeout">
+        function <span class="apidocSignatureSpan">tern.infer.</span>withTimeout
+        <span class="apidocSignatureSpan">(ms, f)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">withTimeout = function (ms, f) {
+  var end = +new Date + ms;
+  var oldEnd = timeout;
+  if (oldEnd &#x26;&#x26; oldEnd &#x3c; end) return f();
+  timeout = end;
+  try { return f(); }
+  finally { timeout = oldEnd; }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.tern.signal" id="apidoc.module.tern.signal">module tern.signal</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.tern.signal.mixin" id="apidoc.element.tern.signal.mixin">
+        function <span class="apidocSignatureSpan">tern.signal.</span>mixin
+        <span class="apidocSignatureSpan">(obj)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">mixin = function (obj) {
+  obj.on = on; obj.off = off;
+  obj.signal = signal;
+  obj.signalReturnFirst = signalReturnFirst;
+  obj.hasHandler = hasHandler;
+  return obj;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return type.toString(maxDepth, parent);
+};
+
+// A variant of AVal used for unknown, dead-end values. Also serves
+// as prototype for AVals, Types, and Constraints because it
+// implements &#x27;empty&#x27; versions of all the methods that the code
+// expects.
+var ANull = exports.ANull = signal.<span class="apidocCodeKeywordSpan">mixin</span>({
+  addType: function() {},
+  propagate: function() {},
+  getProp: function() { return ANull; },
+  forAllProps: function() {},
+  hasType: function() { return false; },
+  isEmpty: function() { return true; },
+  getFunctionType: function() {},
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
