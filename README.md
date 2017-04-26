@@ -1,6 +1,6 @@
 # npmdoc-tern
 
-#### api documentation for  [tern (v0.21.0)](https://github.com/ternjs/tern#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-tern.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-tern) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-tern.svg)](https://travis-ci.org/npmdoc/node-npmdoc-tern)
+#### basic api documentation for  [tern (v0.21.0)](https://github.com/ternjs/tern#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-tern.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-tern) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-tern.svg)](https://travis-ci.org/npmdoc/node-npmdoc-tern)
 
 #### A JavaScript code analyzer for deep, cross-editor language support
 
