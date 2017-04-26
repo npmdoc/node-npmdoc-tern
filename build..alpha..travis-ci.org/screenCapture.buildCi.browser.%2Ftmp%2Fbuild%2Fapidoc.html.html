@@ -1004,7 +1004,22 @@
 
   this.reset();
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  } else if (cur.charAt(0) == "-") {
+    usage(1);
+  } else {
+    files.push(cur);
+  }
+}
+
+var server = new tern.<span class="apidocCodeKeywordSpan">Server</span>({
+  getFile: function(file) { return fs.readFileSync(path.resolve(localDir, file), "utf8"); },
+  defs: defs,
+  plugins: plugins,
+  debug: true,
+  projectDir: localDir
+});
+...</pre></li>
     </ul>
 
 
@@ -1073,21 +1088,24 @@ for (var prop in this.nonRelative) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">defineQueryType = function (name, desc) { queryTypes[name] = desc; }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-
-  server.on("preCondenseReach", preCondenseReach)
-  server.on("postLoadDef", postLoadDef)
-  server.on("typeAt", findTypeAt)
-  server.on("completion", findCompletions)
-})
-
-tern.<span class="apidocCodeKeywordSpan">defineQueryType</span>("exports", {
-  takesFile: true,
-  run: function(server, query, file) {
-    function describe(aval) {
-      var target = {}, type = aval.getType(false)
-      target.type = infer.toString(type, 3)
-      var doc = aval.doc || (type &amp;&amp; type.doc), url = aval.url || (type &amp;&amp; type.url)
-      if (doc) target.doc = doc
+register &lt;a href="#tern.Server.on"&gt;event handlers&lt;/a&gt; on the server, &lt;a href="#tern.Server
+.addDefs"&gt;add&lt;/a&gt;
+type definitions, &lt;a href="#tern.Server.loadPlugin"&gt;load&lt;/a&gt; other plugins as dependencies,
+and/or initialize the plugin&amp;#8217;s state.
+&lt;/p&gt;
+&lt;p&gt; See the server&amp;#8217;s &lt;a href="#events"&gt;list of events&lt;/a&gt; for ways to wire up
+ plugin behavior.&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="tern.defineQueryType"&gt;&lt;/a&gt;&lt;code&gt;tern.<span class="apidocCodeKeywordSpan">defineQueryType
+</span>(name: string, desc: object)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Defines a new type of query with the server. The &lt;code&gt;desc&lt;/code&gt; object is a
+property describing the request. It should at least have a &lt;code&gt;run&lt;/code&gt;
+property, which holds a function &lt;code&gt;fn(Server, query)&lt;/code&gt; that will be
+called to handle queries with a &lt;code&gt;type&lt;/code&gt; property that matches the given
 ...</pre></li>
     </ul>
 
@@ -1209,21 +1227,22 @@ tern.<span class="apidocCodeKeywordSpan">defineQueryType</span>("exports", {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">registerPlugin = function (name, init) { plugins[name] = init; }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-server.mod.angular = {
-  modules: Object.create(null),
-  pendingImports: Object.create(null),
-  nakedModules: []
-};
-  }
-
-  tern.<span class="apidocCodeKeywordSpan">registerPlugin</span>("angular", function(server) {
-initServer(server);
-
-server.on("reset", function() { initServer(server); });
-server.on("postParse", postParse)
-server.on("postLoadDef", postLoadDef)
-server.on("preCondenseReach", preCondenseReach)
-server.on("postCondenseReach", postCondenseReach)
+registered under &lt;code&gt;"myname"&lt;/code&gt; to be called with the argument types and
+argument AST nodes given to the call. This is used, for example, to
+make calls to &lt;code&gt;require&lt;/code&gt; trigger the necessary machinations to fetch a
+dependency and return its type.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="tern.registerPlugin"&gt;&lt;/a&gt;&lt;code&gt;tern.<span class="apidocCodeKeywordSpan">registerPlugin
+</span>(name: string, fn(Server, options))&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+This can be used to register an initialization function
+for the plugin with the given name. A Tern server, when
+&lt;a href="#option_plugins"&gt;configured&lt;/a&gt; to load this plugin, will call this
+initialization function, passing in the server instance and the
 ...</pre></li>
     </ul>
 
@@ -1370,7 +1389,22 @@ var type = known.getType(false)
 
   this.reset();
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  } else if (cur.charAt(0) == "-") {
+    usage(1);
+  } else {
+    files.push(cur);
+  }
+}
+
+var server = new tern.<span class="apidocCodeKeywordSpan">Server</span>({
+  getFile: function(file) { return fs.readFileSync(path.resolve(localDir, file), "utf8"); },
+  defs: defs,
+  plugins: plugins,
+  debug: true,
+  projectDir: localDir
+});
+...</pre></li>
     </ul>
 
 
@@ -1394,21 +1428,21 @@ var type = known.getType(false)
   if (this.cx) this.reset()
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+  if (arguments.length == 1) options = this.options.plugins[name] || true
+  if (name in this.plugins || !(name in plugins) || !options) return
+  this.plugins[name] = true
+  var init = plugins[name](this, options)
 
-  server.on("reset", function() { initServer(server); });
-  server.on("postParse", postParse)
-  server.on("postLoadDef", postLoadDef)
-  server.on("preCondenseReach", preCondenseReach)
-  server.on("postCondenseReach", postCondenseReach)
+  // This is for backwards-compatibilty. Don't rely on it -- use addDef and on directly
+  if (!init) return
+  if (init.defs) this.<span class="apidocCodeKeywordSpan">addDefs</span>(init.defs, init.loadFirst)
+  if (init.passes) for (var type in init.passes) if (init.passes.hasOwnProperty(type))
+    this.on(type, init.passes[type])
+},
 
-  server.<span class="apidocCodeKeywordSpan">addDefs</span>(defs, true)
-});
-
-var defs = {
-  "!name": "angular",
-  "!define": {
-    cacheObj: {
-      info: "fn() -&gt; ?",
+normalizeFilename: function(name) {
+  var norm = this.options.normalizeFilename(name).replace(/\\/g, "/")
+  if (norm.indexOf(this.projectDir) == 0) norm = norm.slice(this.projectDir.length)
 ...</pre></li>
     </ul>
 
@@ -1429,21 +1463,21 @@ var defs = {
   ensureFile(this, name, parent, text);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    return resolved
-  }
+  origins.push(file);
+  if (!name) name = file;
+}
+if (!fs.existsSync(file)) {
+  console.error("File " + file + " does not exist");
+  process.exit(1);
+}
+server.<span class="apidocCodeKeywordSpan">addFile</span>(file, fs.readFileSync(file, "utf8"));
+}
 
-  var known = this.modules[resolved]
-  if (known) return known
+if (!origins.length) usage(1);
 
-  if (/\.js$|(?:^\/)[^\.]+$/.test(resolved))
-    this.server.<span class="apidocCodeKeywordSpan">addFile</span>(resolved, null, parentFile)
-  if (!relative) this.nonRelative[name] = resolved
-  return this.modules[resolved] = new infer.AVal
-},
-
-findIn: function(array, node, pos) {
-  for (var i = 0; i &lt; array.length; i++) {
-    var name = array[i](node, pos)
+server.flush(function(err) {
+if (err) throw err;
+console.log(JSON.stringify(condense.condense(origins, name, {spans: spans}), null, 2));
 ...</pre></li>
     </ul>
 
@@ -1467,7 +1501,23 @@ findIn: function(array, node, pos) {
     delete this.fileMap[file.name];
   }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+var files = doc.files || [];
+if (files.length) ++srv.uses;
+for (var i = 0; i &lt; files.length; ++i) {
+  var file = files[i];
+  file.name = srv.normalizeFilename(file.name)
+  if (file.type == "delete")
+    srv.<span class="apidocCodeKeywordSpan">delFile</span>(file.name);
+  else
+    ensureFile(srv, file.name, null, file.type == "full" ? file.text : null);
+}
+
+var timeBudget = typeof doc.timeout == "number" ? [doc.timeout] : null;
+if (!query) {
+  analyzeAll(srv, timeBudget, function(){});
+...</pre></li>
     </ul>
 
 
@@ -1533,7 +1583,23 @@ function pathLen(path) {
   if (err) this.asyncError = err;
   if (--this.pending === 0) this.signal("everythingFetched");
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  srv.fileMap[name] = file;
+  if (text != null) {
+    updateText(file, text, srv);
+  } else if (srv.options.async) {
+    srv.startAsyncAction();
+    srv.options.getFile(name, function(err, text) {
+      updateText(file, text || "", srv);
+      srv.<span class="apidocCodeKeywordSpan">finishAsyncAction</span>(err);
+    });
+  } else {
+    updateText(file, srv.options.getFile(name) || "", srv);
+  }
+}
+
+function fetchAll(srv, c) {
+...</pre></li>
     </ul>
 
 
@@ -1552,7 +1618,19 @@ function pathLen(path) {
     infer.withContext(cx, c);
   });
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    process.exit(1);
+  }
+  server.addFile(file, fs.readFileSync(file, "utf8"));
+}
+
+if (!origins.length) usage(1);
+
+server.<span class="apidocCodeKeywordSpan">flush</span>(function(err) {
+  if (err) throw err;
+  console.log(JSON.stringify(condense.condense(origins, name, {spans: spans}), null, 2));
+});
+...</pre></li>
     </ul>
 
 
@@ -1568,7 +1646,22 @@ function pathLen(path) {
   var arr = this._handlers &amp;&amp; this._handlers[type]
   return arr &amp;&amp; arr.length &gt; 0 &amp;&amp; arr
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  function findExprType(srv, query, file, expr) {
+var type;
+if (expr) {
+  infer.resetGuessing();
+  type = infer.expressionType(expr);
+}
+var typeHandlers = srv.<span class="apidocCodeKeywordSpan">hasHandler</span>("typeAt")
+if (typeHandlers) {
+  var pos = resolvePos(file, query.end)
+  for (var i = 0; i &lt; typeHandlers.length; i++)
+    type = typeHandlers[i](file, pos, expr, type)
+}
+if (!type) throw ternError("No type found at the given position.");
+...</pre></li>
     </ul>
 
 
@@ -1593,20 +1686,21 @@ function pathLen(path) {
     this.on(type, init.passes[type])
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-}
+  this.pending = 0;
+  this.asyncError = null;
+  this.mod = {}
 
-function hasProps(obj) {
-  if (obj) for (var _prop in obj) return true
-}
+  this.defs = options.defs.slice(0)
+  this.plugins = Object.create(null)
+  for (var plugin in options.plugins) if (options.plugins.hasOwnProperty(plugin))
+    this.<span class="apidocCodeKeywordSpan">loadPlugin</span>(plugin, options.plugins[plugin])
 
-tern.registerPlugin("commonjs", function(server) {
-  server.<span class="apidocCodeKeywordSpan">loadPlugin</span>("modules")
-  server.mod.modules.on("wrapScope", initScope)
-  server.mod.modules.on("getExports", function(file, mod) {
-    var exports = file.scope.exports
-    if (exports.types.length &gt; 1 || hasProps(exports.getObjType()))
-      exports.propagate(mod)
-  })
+  this.reset();
+};
+Server.prototype = signal.mixin({
+  addFile: function(name, /*optional*/ text, parent) {
+    // Don't crash when sloppy plugins pass non-existent parent ids
+    if (parent &amp;&amp; !(parent in this.fileMap)) parent = null;
 ...</pre></li>
     </ul>
 
@@ -1625,22 +1719,21 @@ tern.registerPlugin("commonjs", function(server) {
   return norm
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  var base = endSlash ? word : path.dirname(word) + "/"
-  var filePart = endSlash ? "" : path.basename(word)
-
-  var me = this
-  fs.readdirSync(dir).forEach(function(file) {
-    if (/^\./.test(file)) return
-    if (filter(filePart, file, query)) {
-      var projectPath = me.server.<span class="apidocCodeKeywordSpan">normalizeFilename</span>(path.relative(pDir, path.resolve(
-dir, file)))
-      if (projectPath == parentFile) return
-      var value = me.modules[projectPath]
-      if (/\.js$/.test(file)) file = file.slice(0, file.length - 3)
-      tern.addCompletion(query, completions, base + file, value)
-    }
-  })
-}
+  this.reset();
+};
+Server.prototype = signal.mixin({
+  addFile: function(name, /*optional*/ text, parent) {
+    // Don't crash when sloppy plugins pass non-existent parent ids
+    if (parent &amp;&amp; !(parent in this.fileMap)) parent = null;
+    if (!(name in this.fileMap))
+      name = this.<span class="apidocCodeKeywordSpan">normalizeFilename</span>(name)
+    ensureFile(this, name, parent, text);
+  },
+  delFile: function(name) {
+    var file = this.findFile(name);
+    if (file) {
+      this.needsPurge.push(file.name);
+      for (var i = 0; i &lt; this.files.length; i++) {
 ...</pre></li>
     </ul>
 
@@ -1658,7 +1751,22 @@ dir, file)))
   if (arr) for (var i = 0; i &lt; arr.length; ++i)
     if (arr[i] == f) { arr.splice(i, 1); break; }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    }
+  });
+  if (done) c();
+}
+
+function waitOnFetch(srv, timeBudget, c) {
+  var done = function() {
+    srv.<span class="apidocCodeKeywordSpan">off</span>("everythingFetched", done);
+    clearTimeout(timeout);
+    analyzeAll(srv, timeBudget, c);
+  };
+  srv.on("everythingFetched", done);
+  var timeout = setTimeout(done, srv.options.fetchTimeout);
+}
+...</pre></li>
     </ul>
 
 
@@ -1675,20 +1783,19 @@ dir, file)))
   (handlers[type] || (handlers[type] = [])).push(f);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    nakedModules: []
-  };
-}
 
-tern.registerPlugin("angular", function(server) {
-  initServer(server);
+  var target = url.parse(req.url, true);
+  if (target.pathname == "/ping") return respondSimple(resp, 200, "pong");
+  if (target.pathname != "/") return respondSimple(resp, 404, "No service at " + target.pathname);
 
-  server.<span class="apidocCodeKeywordSpan">on</span>("reset", function() { initServer(server); });
-  server.on("postParse", postParse)
-  server.on("postLoadDef", postLoadDef)
-  server.on("preCondenseReach", preCondenseReach)
-  server.on("postCondenseReach", postCondenseReach)
-
-  server.addDefs(defs, true)
+  if (req.method == "POST") {
+    var body = "";
+    req.<span class="apidocCodeKeywordSpan">on</span>("data", function (data) { body += data; });
+    req.on("end", function() { respond(resp, body); });
+  } else if (req.method == "GET") {
+    if (target.query.doc) respond(resp, target.query.doc);
+    else respondSimple(resp, 400, "Missing query document");
+  }
 });
 ...</pre></li>
     </ul>
@@ -1716,24 +1823,20 @@ tern.registerPlugin("angular", function(server) {
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  "!type": "fn(options: ?, callback?: fn(res: +http.IncomingMessage)) -&gt; +http.ClientRequest",
-  "!url": "https://nodejs.org/api/http.html#http_http_request_options_callback",
-  "!doc": "Node maintains several connections per server to make HTTP requests. This function allows one to transparently
- issue requests."
-},
-get: {
-  "!type": "fn(options: ?, callback?: fn(res: +http.IncomingMessage)) -&gt; +http.ClientRequest",
-  "!url": "https://nodejs.org/api/http.html#http_http_get_options_callback",
-  "!doc": "Since most requests are GET requests without bodies, Node provides this convenience method. The only difference
- between this method and http.<span class="apidocCodeKeywordSpan">request</span>() is that it sets the method to GET and calls req
-.end() automatically."
-},
-globalAgent: {
-  "!type": "+http.Agent",
-  "!url": "https://nodejs.org/api/http.html#http_http_globalagent",
-  "!doc": "Global instance of Agent which is used as the default for all http client requests."
-},
-Agent: {
+}
+
+function respond(resp, doc) {
+  try { var doc = JSON.parse(doc); }
+  catch(e) { return respondSimple(resp, 400, "JSON parse error: " + e.message); }
+  if (verbose) console.log("Request: " + JSON.stringify(doc, null, 2));
+
+  server.<span class="apidocCodeKeywordSpan">request</span>(doc, function(err, data) {
+    if (err) return respondSimple(resp, 400, String(err));
+    resp.writeHead(200, {"content-type": "application/json; charset=utf-8"});
+    if (verbose) console.log("Response: " + JSON.stringify(data, null, 2) + "\n");
+    resp.end(JSON.stringify(data));
+  });
+}
 ...</pre></li>
     </ul>
 
@@ -1760,7 +1863,23 @@ Agent: {
   }
   this.signal("postReset");
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  this.mod = {}
+
+  this.defs = options.defs.slice(0)
+  this.plugins = Object.create(null)
+  for (var plugin in options.plugins) if (options.plugins.hasOwnProperty(plugin))
+    this.loadPlugin(plugin, options.plugins[plugin])
+
+  this.<span class="apidocCodeKeywordSpan">reset</span>();
+};
+Server.prototype = signal.mixin({
+  addFile: function(name, /*optional*/ text, parent) {
+    // Don't crash when sloppy plugins pass non-existent parent ids
+    if (parent &amp;&amp; !(parent in this.fileMap)) parent = null;
+    if (!(name in this.fileMap))
+      name = this.normalizeFilename(name)
+...</pre></li>
     </ul>
 
 
@@ -1811,7 +1930,23 @@ for (var i = 0; i &lt; state.patchUp.length; ++i)
     if (result) return result
   }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var options = {
+    directSourceFile: file,
+    allowReturnOutsideFunction: true,
+    allowImportExportEverywhere: true,
+    ecmaVersion: srv.options.ecmaVersion,
+    allowHashBang: true
+  }
+  var text = srv.<span class="apidocCodeKeywordSpan">signalReturnFirst</span>("preParse", file.text, options) || file.
+text
+  var ast = infer.parse(text, options)
+  srv.signal("postParse", ast, text)
+  return ast
+}
+
+var astral = /[\uD800-\uDBFF]/g
+...</pre></li>
     </ul>
 
 
@@ -1826,7 +1961,23 @@ for (var i = 0; i &lt; state.patchUp.length; ++i)
     <li>description and source-code<pre class="apidocCodePre">startAsyncAction = function () {
   ++this.pending;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+var file = new File(name, parent);
+srv.files.push(file);
+srv.fileMap[name] = file;
+if (text != null) {
+  updateText(file, text, srv);
+} else if (srv.options.async) {
+  srv.<span class="apidocCodeKeywordSpan">startAsyncAction</span>();
+  srv.options.getFile(name, function(err, text) {
+    updateText(file, text || "", srv);
+    srv.finishAsyncAction(err);
+  });
+} else {
+  updateText(file, srv.options.getFile(name) || "", srv);
+}
+...</pre></li>
     </ul>
 
 
@@ -1941,7 +2092,23 @@ for (var i = 0; i &lt; state.patchUp.length; ++i)
   if (node.hasOwnProperty("commentsBefore")) return node.commentsBefore;
   return node.commentsBefore = exports.commentsBefore(text, node.start);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+server.on("postParse", postParse)
+server.on("postInfer", postInfer)
+server.on("postLoadDef", postLoadDef)
+  });
+
+  function postParse(ast, text) {
+function attachComments(node) { comment.<span class="apidocCodeKeywordSpan">ensureCommentsBefore</span>(text, node); }
+
+walk.simple(ast, {
+  VariableDeclaration: attachComments,
+  FunctionDeclaration: attachComments,
+  MethodDefinition: attachComments,
+  Property: attachComments,
+  AssignmentExpression: function(node) {
+...</pre></li>
     </ul>
 
 
@@ -1985,7 +2152,18 @@ for (var i = 0; i &lt; state.patchUp.length; ++i)
 
   return simplify(state.output, state.options.sortOutput);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  server.addFile(file, fs.readFileSync(file, "utf8"));
+}
+
+if (!origins.length) usage(1);
+
+server.flush(function(err) {
+  if (err) throw err;
+  console.log(JSON.stringify(condense.<span class="apidocCodeKeywordSpan">condense</span>(origins, name, {spans: spans}), null,
+2));
+});
+...</pre></li>
     </ul>
 
 
@@ -2164,7 +2342,23 @@ for (var i = 0; i &lt; state.patchUp.length; ++i)
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getFile = function (_f, c) { if (this.async) c(null, null); }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var file = new File(name, parent);
+  srv.files.push(file);
+  srv.fileMap[name] = file;
+  if (text != null) {
+    updateText(file, text, srv);
+  } else if (srv.options.async) {
+    srv.startAsyncAction();
+    srv.options.<span class="apidocCodeKeywordSpan">getFile</span>(name, function(err, text) {
+      updateText(file, text || "", srv);
+      srv.finishAsyncAction(err);
+    });
+  } else {
+    updateText(file, srv.options.getFile(name) || "", srv);
+  }
+}
+...</pre></li>
     </ul>
 
 
@@ -2178,22 +2372,21 @@ for (var i = 0; i &lt; state.patchUp.length; ++i)
     <ul>
     <li>description and source-code<pre class="apidocCodePre">normalizeFilename = function (name) { return name }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  var base = endSlash ? word : path.dirname(word) + "/"
-  var filePart = endSlash ? "" : path.basename(word)
-
-  var me = this
-  fs.readdirSync(dir).forEach(function(file) {
-    if (/^\./.test(file)) return
-    if (filter(filePart, file, query)) {
-      var projectPath = me.server.<span class="apidocCodeKeywordSpan">normalizeFilename</span>(path.relative(pDir, path.resolve(
-dir, file)))
-      if (projectPath == parentFile) return
-      var value = me.modules[projectPath]
-      if (/\.js$/.test(file)) file = file.slice(0, file.length - 3)
-      tern.addCompletion(query, completions, base + file, value)
-    }
-  })
-}
+  this.reset();
+};
+Server.prototype = signal.mixin({
+  addFile: function(name, /*optional*/ text, parent) {
+    // Don't crash when sloppy plugins pass non-existent parent ids
+    if (parent &amp;&amp; !(parent in this.fileMap)) parent = null;
+    if (!(name in this.fileMap))
+      name = this.<span class="apidocCodeKeywordSpan">normalizeFilename</span>(name)
+    ensureFile(this, name, parent, text);
+  },
+  delFile: function(name) {
+    var file = this.findFile(name);
+    if (file) {
+      this.needsPurge.push(file.name);
+      for (var i = 0; i &lt; this.files.length; i++) {
 ...</pre></li>
     </ul>
 
@@ -2230,7 +2423,24 @@ dir, file)))
   this.forward = null;
   this.maxWeight = 0;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+example, a variable can hold two different types of values, the
+associated abstract value will hold both these types. In some cases,
+no type can be assigned to something at all, in which case the
+abstract value remains empty.&lt;/p&gt;
+&lt;p&gt; Abstract values expose the following interface:&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.AVal"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">AVal</span>()&lt;
+;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Constructor. Creates an empty AVal.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+...</pre></li>
     </ul>
 
 
@@ -2258,21 +2468,23 @@ dir, file)))
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    for (var i = 0; i &lt; types.length; i++) unwrapType(types[i], self, args).propagate(union);
-    union.maxWeight = 1e5;
-    return union;
-  };
-}
-function computedArray(inner) {
-  return function(self, args) {
-    return new infer.<span class="apidocCodeKeywordSpan">Arr</span>(inner(self, args));
-  };
-}
-function computedTuple(types) {
-  return function(self, args) {
-    return new infer.Arr(types.map(function(tp) { return unwrapType(tp, self, args) }))
-  }
-}
+&lt;p&gt;
+Constructor for the type that implements functions. Inherits from
+&lt;a href="#infer.Obj"&gt;Obj&lt;/a&gt;. The &lt;a href="#infer_aval"&gt;&lt;code&gt;AVal&amp;#
+x3c;/code&gt;&lt;/a&gt; types are used to track
+the input and output types of the function.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.Arr"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">Arr</span>(contentType
+: AVal)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Constructor that creates
+an array type with the given content type.
+&lt;/p&gt;
+&lt;/dd&gt;
 ...</pre></li>
     </ul>
 
@@ -2320,7 +2532,25 @@ function computedTuple(types) {
       def.load(defs[i]);
   });
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+as some meta-information and state used by the type inference process.
+Almost all operations in the inference module require a context.&lt;/p&gt;
+&lt;p&gt; To prevent having to pass the context around through every function, a
+form of dynamic binding is usedâ€”the &lt;code&gt;withContext&lt;/code&gt; function executes a
+function body with a given object used as the current context.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.Context"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">Context</span>(
+defs: [object])&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+A constructor
+function for contexts. &lt;code&gt;defs&lt;/code&gt; should be an array of &lt;a href="#typedef"&gt;type definition
+ objects&lt;/a&gt;, which will be used to initialize the
+global scope.
+&lt;/p&gt;
+...</pre></li>
     </ul>
 
 
@@ -2372,22 +2602,24 @@ function computedTuple(types) {
   this.generator = generator
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  }
-}
-
-function computedFunc(name, args, retType, generator) {
-  return function(self, cArgs) {
-    var realArgs = [];
-    for (var i = 0; i &lt; args.length; i++) realArgs.push(unwrapType(args[i], self, cArgs));
-    return new infer.<span class="apidocCodeKeywordSpan">Fn</span>(name, infer.ANull, realArgs, unwrapType(retType, self, cArgs),
-generator);
-  };
-}
-function computedUnion(types) {
-  return function(self, args) {
-    var union = new infer.AVal;
-    for (var i = 0; i &lt; types.length; i++) unwrapType(types[i], self, args).propagate(union);
-    union.maxWeight = 1e5;
+Constructor for the
+type that represents JavaScript objects. &lt;code&gt;proto&lt;/code&gt; may be another
+object, or &lt;code&gt;true&lt;/code&gt; as a short-hand for &lt;code&gt;Object.prototype&lt;/code&gt;, or &lt;
+;code&gt;null&lt;/code&gt;
+for prototype-less objects.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.Fn"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">Fn</span>(name: string
+?, self: AVal, args: [AVal], argNames:Â&nbsp;[string], retval:Â&nbsp;AVal)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Constructor for the type that implements functions. Inherits from
+&lt;a href="#infer.Obj"&gt;Obj&lt;/a&gt;. The &lt;a href="#infer_aval"&gt;&lt;code&gt;AVal&amp;#
+x3c;/code&gt;&lt;/a&gt; types are used to track
+the input and output types of the function.
+&lt;/p&gt;
 ...</pre></li>
     </ul>
 
@@ -2524,21 +2756,23 @@ function computedFunc(name, args, retType, generator) {
   this.origin = cx.curOrigin;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  if (comp &amp;&amp; this.eat("[")) return this.parsePoly(base);
-  if (top &amp;&amp; this.base) {
-    this.base.proto = base
-    var name = base.hasCtor &amp;&amp; base.hasCtor.name || base.name
-    if (name) this.base.name = name
-    return this.base
-  }
-  if (top &amp;&amp; this.forceNew) return new infer.<span class="apidocCodeKeywordSpan">Obj</span>(base);
-  return infer.getInstance(base);
-} else if (this.eat(":")) {
-  var name = this.word(/[\w$\.]/)
-  return infer.getSymbol(name)
-} else if (comp &amp;&amp; this.eat("!")) {
-  var arg = this.word(/\d/);
-  if (arg) {
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;h3&gt; &lt;a id="infer_types"&gt;&lt;/a&gt;Types&lt;/h3&gt;
+&lt;p&gt; Tern has a more or less complete implementation of the JavaScript type
+system.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.Obj"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">Obj</span>(proto,
+name?: string)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Constructor for the
+type that represents JavaScript objects. &lt;code&gt;proto&lt;/code&gt; may be another
+object, or &lt;code&gt;true&lt;/code&gt; as a short-hand for &lt;code&gt;Object.prototype&lt;/code&gt;, or &lt;
+;code&gt;null&lt;/code&gt;
+for prototype-less objects.
 ...</pre></li>
     </ul>
 
@@ -2588,21 +2822,23 @@ function computedFunc(name, args, retType, generator) {
   this.isCatch = !!isCatch
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-this.modNameTests = []
-this.importTests = []
-this.completableTypes = Object.create(null)
-  }
-
-  Modules.prototype = signal.mixin({
-buildWrappingScope: function(parent, origin, node) {
-  var scope = new infer.<span class="apidocCodeKeywordSpan">Scope</span>(parent, node)
-  scope.origin = origin
-  this.signal("wrapScope", scope)
-  return scope
-},
-
-maybeOverride: function(name) {
-  if (!this.options.modules || !this.options.modules.hasOwnProperty(name))
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;h3&gt; &lt;a id="infer_scopes"&gt;&lt;/a&gt;Scopes&lt;/h3&gt;
+&lt;p&gt; Scopes are derived from the &lt;a href="#infer.Obj"&gt;&lt;code&gt;Obj&lt;/code&gt;&lt;/a&amp;#
+x3e; type, and variables
+are represented the same way as properties.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.Scope"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">Scope</span>(parent
+?: Scope)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Constructor for scope
+objects. The top scope won&amp;#8217;t have a parent.
+&lt;/p&gt;
+&lt;/dd&gt;
 ...</pre></li>
     </ul>
 
@@ -2724,7 +2960,24 @@ var def = data["!define"];
 
   cx.curOrigin = null;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;p&gt;
+Parse a piece of
+code for use by Tern. Will automatically fall back to the
+error-tolerant parser if the regular parser can&amp;#8217;t parse the code.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.analyze"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">analyze</span>(
+ast: AST, name: string, scope?: Scope)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Analyze a syntax tree. &lt;code&gt;name&lt;/code&gt; will be used to set the origin of types,
+properties, and variables produced by this code. The optional &lt;code&gt;scope&lt;/code&gt;
+argument can be used to specify a &lt;a href="#infer_scopes"&gt;scope&lt;/a&gt; in which the
+code should be analyzed. It will default to the top-level scope.
+...</pre></li>
     </ul>
 
 
@@ -2739,7 +2992,23 @@ var def = data["!define"];
     <li>description and source-code<pre class="apidocCodePre">clearScopes = function (ast) {
   walk.simple(ast, scopeClearer)
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  this.signal("reset");
+  this.cx = new infer.Context(this.defs, this);
+  this.uses = 0;
+  this.budgets = Object.create(null);
+  for (var i = 0; i &lt; this.files.length; ++i) {
+    var file = this.files[i];
+    if (file.scope) {
+      infer.<span class="apidocCodeKeywordSpan">clearScopes</span>(file.ast);
+      file.scope = null;
+    }
+  }
+  this.signal("postReset");
+},
+
+request: function(doc, c) {
+...</pre></li>
     </ul>
 
 
@@ -2761,22 +3030,23 @@ var def = data["!define"];
   return ctor;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-};
-
-// Used to register custom logic for more involved effect or type
-// computation.
-var customFunctions = Object.create(null);
-infer.registerFunction = function(name, f) { customFunctions[name] = f; };
-
-var IsCreated = infer.<span class="apidocCodeKeywordSpan">constraint</span>({
-  construct: function(created, target, spec) {
-    this.created = created;
-    this.target = target;
-    this.spec = spec;
-  },
-  addType: function(tp) {
-    if (tp instanceof infer.Obj &amp;&amp; this.created++ &lt; 5) {
-...</pre></li>
+&lt;code&gt;addType&lt;/code&gt; method to receive them, which causes all AVals to also be
+useable as constraints. The inference engine defines a number of
+additional constraints to propagate values in more indirect ways. See
+the &lt;a href="http://marijnhaverbeke.nl/blog/tern.html"&gt;blog post&lt;/a&gt; on the
+inference algorithm for some examples.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.constraint"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">constraint<!--
+span-->(methods: object) â†’ constructor&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+This is a constructor-constructor for constraints. It&amp;#8217;ll create a
+constructor with all the given methods copied into its prototype,
+which will run its &lt;code&gt;construct&lt;/code&gt; method on its arguments when
+instantiated.
+...</span></pre></li>
     </ul>
 
 
@@ -2790,21 +3060,23 @@ var IsCreated = infer.<span class="apidocCodeKeywordSpan">constraint</span>({
     <ul>
     <li>description and source-code<pre class="apidocCodePre">cx = function () { return cx; }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  state.server.signal("postCondense", state)
-
-  return simplify(state.output, state.options.sortOutput);
-};
-
-function State(origins, name, options) {
-  this.origins = origins;
-  this.cx = infer.<span class="apidocCodeKeywordSpan">cx</span>();
-  this.server = options.server || this.cx.parent || {signal: function() {}}
-  this.maxOrigin = -Infinity;
-  for (var i = 0; i &lt; origins.length; ++i)
-    this.maxOrigin = Math.max(this.maxOrigin, this.cx.origins.indexOf(origins[i]));
-  this.output = {"!name": name, "!define": {}};
-  this.options = options;
-  this.types = Object.create(null);
+&lt;p&gt;
+Calls &lt;code&gt;f&lt;/code&gt; with the current context bound to &lt;code&gt;context&lt;/code&gt;. Basically,
+all
+code that does something with the inference engine should be wrapped
+in such a call.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.cx"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">cx</span>() â†’ Context
+&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Returns the current context
+object.
+&lt;/p&gt;
+&lt;/dd&gt;
 ...</pre></li>
     </ul>
 
@@ -2818,7 +3090,24 @@ function State(origins, name, options) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">didGuess = function () { return guessing; }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;/dl&gt;
+&lt;p&gt; Whenever the code in &lt;code&gt;lib/infer.js&lt;/code&gt; guesses a type through fuzzy
+heuristics (through &lt;a href="#infer.AVal.getType"&gt;&lt;code&gt;getType&lt;/code&gt;&lt;/a&gt; or
+&lt;a href="#infer.expressionType"&gt;&lt;code&gt;expressionType&lt;/code&gt;&lt;/a&gt;), it sets a flag
+. The
+following two function allow access to this flag:&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.didGuess"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">didGuess</span>() â†’ bool&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Test whether the
+guessing flag is set.
+&lt;/p&gt;
+&lt;/dd&gt;
+...</pre></li>
     </ul>
 
 
@@ -2834,21 +3123,24 @@ function State(origins, name, options) {
   return findType(found.node, found.state);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-exports.typeFromContext = function(ast, found) {
-  var parent = exports.parentNode(found.node, ast);
-  var type = null;
-  if (findTypeFromContext.hasOwnProperty(parent.type)) {
-    var finder = findTypeFromContext[parent.type];
-    type = finder &amp;&amp; finder(parent, found.node, function(node, fromContext) {
-      var obj = {node: node, state: found.state};
-      var tp = fromContext ? exports.typeFromContext(ast, obj) : exports.<span class="apidocCodeKeywordSpan">expressionType</span>(obj);
-      return tp || ANull;
-    });
-  }
-  return type || exports.expressionType(found);
-};
-
-// Flag used to indicate that some wild guessing was used to produce
+&lt;p&gt;
+Similar to &lt;a href="#infer.findExpressionAround"&gt;&lt;code&gt;findExpressionAround&lt;/code&gt;&lt;/
+a&gt;,
+except that it will return the innermost expression node that spans
+the given range, rather than only exact matches.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.expressionType"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">expressionType
+</span>(expr: {node, state}) â†’ AVal&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Determine an expression for the given node and scope (as returned by
+the functions above). Will return an &lt;a href="#infer_aval"&gt;&lt;code&gt;AVal&lt;/code&gt;&lt;/a&gt;
+; or plain
+&lt;a href="#infer_types"&gt;&lt;code&gt;Type&lt;/code&gt;&lt;/a&gt;.
+&lt;/p&gt;
 ...</pre></li>
     </ul>
 
@@ -2870,21 +3162,23 @@ exports.typeFromContext = function(ast, found) {
   return walk.findNodeAround(ast, end, test, searchVisitor, defaultScope || cx.topScope);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  var arg = node.arguments[0]
-  if (arg &amp;&amp; arg.type == "Literal" &amp;&amp; typeof arg.value == "string") return arg.value
-}
-
-function isModuleName(node) {
-  if (node.type != "Literal" || typeof node.value != "string") return
-
-  var call = infer.<span class="apidocCodeKeywordSpan">findExpressionAround</span>(node.sourceFile.ast, null, node.end, null,
-                                        function(_, n) { return isStaticRequire(n) != null })
-  if (call &amp;&amp; call.node.arguments[0] == node) return node.value
-}
-
-function isImport(node) {
-  if (node.type != "Identifier") return
-  var decl = infer.findExpressionAround(node.sourceFile.ast, null, node.end, null, "VariableDeclarator"), name
+offset. &lt;code&gt;scope&lt;/code&gt; can be given to override the outer scope, which
+defaults to the context&amp;#8217;s top scope. Will return a &lt;code&gt;{node, state}&lt;/code&gt;
+object if successful, where &lt;code&gt;node&lt;/code&gt; is AST node, and &lt;code&gt;state&lt;/code&gt; is the
+scope at that point. Returns &lt;code&gt;null&lt;/code&gt; if unsuccessful.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.findExpressionAround"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">findExpressionAround
+</span>(ast: AST, start: number?, end:Â&nbsp;number, scope?:Â&nbsp;Scope) â†’ {node,Â&nbsp;state}&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Similar to &lt;a href="#infer.findExpressionAround"&gt;&lt;code&gt;findExpressionAround&lt;/code&gt;&lt;/
+a&gt;,
+except that it will return the innermost expression node that spans
+the given range, rather than only exact matches.
+&lt;/p&gt;
 ...</pre></li>
     </ul>
 
@@ -2904,7 +3198,24 @@ function isImport(node) {
   };
   return walk.findNodeAt(ast, start, end, test, searchVisitor, defaultScope || cx.topScope);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;h3&gt; &lt;a id="infer_util"&gt;&lt;/a&gt;Utilities&lt;/h3&gt;
+&lt;p&gt; These are miscellaneous utilities that come in helpful when doing code
+analysis.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.findExpressionAt"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">findExpressionAt
+</span>(ast: AST, start: number?, end: number, scope?:Â&nbsp;Scope) â†’ {node,Â&nbsp;state}&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Searches the given syntax tree for an expression that ends at the
+given end offset and, if &lt;code&gt;start&lt;/code&gt; is given, starts at the given start
+offset. &lt;code&gt;scope&lt;/code&gt; can be given to override the outer scope, which
+defaults to the context&amp;#8217;s top scope. Will return a &lt;code&gt;{node, state}&lt;/code&gt;
+...</pre></li>
     </ul>
 
 
@@ -2951,7 +3262,25 @@ function isImport(node) {
     }
   }, simpleWalker, scope);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Will traverse the given syntax tree, using &lt;code&gt;scope&lt;/code&gt; as the starting
+scope, looking for references to variable &lt;code&gt;name&lt;/code&gt; that resolve to scope
+&lt;code&gt;refScope&lt;/code&gt;, and call &lt;code&gt;f&lt;/code&gt; with the node of the reference and its local
+scope for each of them.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.findPropRefs"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">findPropRefs
+</span>(ast: AST, scope: Scope, objType: Obj, propName:Â&nbsp;string, f:Â&nbsp;fn(AST))&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Analogous to &lt;a href="#infer.findRefs"&gt;&lt;code&gt;findRefs&lt;/code&gt;&lt;/a&gt;, but used to
+look for
+references to a specific property instead. Whereas &lt;code&gt;findRefs&lt;/code&gt; is
+precise, this is dependent on type inference, and thus can not be
+relied on to be precise.
+...</pre></li>
     </ul>
 
 
@@ -2975,7 +3304,23 @@ function isImport(node) {
   walk.ancestor(ast, {Identifier: handleId, VariablePattern: handleId},
                 exports.fullVisitor, baseScope)
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;p&gt;
+Find the scope at a given position in the syntax tree. The &lt;code&gt;scope&lt;/code&gt;
+parameter can be used to override the scope used for code that isn&amp;#8217;t
+wrapped in any function.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.findRefs"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">findRefs</span>(ast: AST, scope: Scope, name: string, refScope:Â&nbsp;Scope, f:Â&nbsp;fn(AST,Â&nbsp;Scope))&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Will traverse the given syntax tree, using &lt;code&gt;scope&lt;/code&gt; as the starting
+scope, looking for references to variable &lt;code&gt;name&lt;/code&gt; that resolve to scope
+&lt;code&gt;refScope&lt;/code&gt;, and call &lt;code&gt;f&lt;/code&gt; with the node of the reference and its local
+scope for each of them.
+...</pre></li>
     </ul>
 
 
@@ -2991,7 +3336,23 @@ function isImport(node) {
   var scope = scopeAt(ast, pos, defaultScope);
   scope.gatherProperties(f, 0);
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  if (!completions.length &amp;&amp; query.guess !== false &amp;&amp; objType &amp;&amp; objType.guessProperties)
+    objType.guessProperties(function(p, o, d) {if (p != prop &amp;&amp; p != "âœ–") gather(p, o, d);});
+  if (!completions.length &amp;&amp; word.length &gt;= 2 &amp;&amp; query.guess !== false)
+    for (var prop in srv.cx.props) gather(prop, srv.cx.props[prop][0], 0);
+  hookname = "memberCompletion";
+} else {
+  infer.<span class="apidocCodeKeywordSpan">forAllLocalsAt</span>(file.ast, wordStart, file.scope, gather);
+  if (query.includeKeywords) {
+    (srv.options.ecmaVersion &gt;= 6 ? jsKeywordsES6 : jsKeywords).forEach(function(kw) {
+      gather(kw, null, 0, function(rec) { rec.isKeyword = true; });
+    });
+  };
+  hookname = "variableCompletion";
+}
+...</pre></li>
     </ul>
 
 
@@ -3007,21 +3368,21 @@ function isImport(node) {
   type.gatherProperties(f, 0);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  function findImportCompletions(me, file, query, node, imp, wordEnd) {
-var completions = []
-var word = node.name ? node.name.slice(0, wordEnd - node.start) : ""
-if (query.caseInsensitive) word = word.toLowerCase()
+    prop = word;
+  }
+}
 
-var modType = me.resolveModule(imp.name, node.sourceFile.name).getType()
-if (!modType) return null
-infer.<span class="apidocCodeKeywordSpan">forAllPropertiesOf</span>(modType, function(prop, obj, depth) {
-  if (obj == infer.cx().protos.Object) return
-  if (query.filter !== false &amp;&amp; word &amp;&amp;
-      (query.caseInsensitive ? prop.toLowerCase() : prop).indexOf(word) !== 0) return
-  tern.addCompletion(query, completions, prop, obj &amp;&amp; obj.props[prop], depth)
-})
-return {
-  start: tern.outputPos(query, file, node.name ? node.start : wordEnd),
+if (prop != null) {
+  srv.cx.completingProperty = prop;
+
+  if (objType) infer.<span class="apidocCodeKeywordSpan">forAllPropertiesOf</span>(objType, gather);
+
+  if (!completions.length &amp;&amp; query.guess !== false &amp;&amp; objType &amp;&amp; objType.guessProperties)
+    objType.guessProperties(function(p, o, d) {if (p != prop &amp;&amp; p != "âœ–") gather(p, o, d);});
+  if (!completions.length &amp;&amp; word.length &gt;= 2 &amp;&amp; query.guess !== false)
+    for (var prop in srv.cx.props) gather(prop, srv.cx.props[prop][0], 0);
+  hookname = "memberCompletion";
+} else {
 ...</pre></li>
     </ul>
 
@@ -3167,21 +3528,21 @@ exports.typeFromContext = function(ast, found) {
   return ast;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-});
 
-// PARSING
+function loadDef(name) {
+var found = findFile(name, "defs", ".json");
+if (!found) {
+  console.error("Could not find def file " + name);
+  process.exit(1);
+}
+defs.push(JSON.<span class="apidocCodeKeywordSpan">parse</span>(fs.readFileSync(found, "utf8")));
+}
 
-var parse = exports.parse = function(text, options, thirdArg) {
-  if (!options || Array.isArray(options)) options = thirdArg
-  var ast;
-  try { ast = acorn.<span class="apidocCodeKeywordSpan">parse</span>(text, options); }
-  catch(e) { ast = acorn_loose.parse_dammit(text, options); }
-  return ast;
-};
+loadDef("ecmascript");
 
-// ANALYSIS INTERFACE
-
-exports.analyze = function(ast, name, scope) {
+function loadPlugin(name, val) {
+var found = findFile(name, "plugin", ".js");
+if (!found) {
 ...</pre></li>
     </ul>
 
@@ -3209,7 +3570,23 @@ exports.analyze = function(ast, name, scope) {
   }
   return "&lt;i&gt;";
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+AssignmentExpression: function(node, scope) {
+  if (node.commentsBefore)
+    interpretComments(node, node.commentsBefore, scope,
+                      infer.expressionType({node: node.left, state: scope}));
+},
+ObjectExpression: function(node, scope) {
+  for (var i = 0; i &lt; node.properties.length; ++i) {
+    var prop = node.properties[i], name = infer.<span class="apidocCodeKeywordSpan">propName</span>(prop)
+    if (name != "&lt;i&gt;" &amp;&amp; prop.commentsBefore)
+      interpretComments(prop, prop.commentsBefore, scope, node.objType.getProp(name))
+  }
+},
+Class: function(node, scope) {
+  var proto = node.objType.getProp("prototype").getObjType()
+  if (!proto) return
+...</pre></li>
     </ul>
 
 
@@ -3264,22 +3641,23 @@ exports.purge = function(origins, start, end) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">registerFunction = function (name, f) { customFunctions[name] = f; }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-        }
-      }
-      this.target.addType(derived);
-    }
-  }
-});
-
-infer.<span class="apidocCodeKeywordSpan">registerFunction</span>("Object_create", function(_self, args, argNodes) {
-  if (argNodes &amp;&amp; argNodes.length &amp;&amp; argNodes[0].type == "Literal" &amp;&amp; argNodes[0].value ==
-null)
-    return new infer.Obj();
-
-  var result = new infer.AVal;
-  if (args[0]) args[0].propagate(new IsCreated(0, result, args[1]));
-  return result;
-});
+&lt;a href="#plugin_node"&gt;node.js&lt;/a&gt; and &lt;a href="#plugin_requirejs"&gt;RequireJS&amp;#
+x3c;/a&gt;, which
+teach the Tern server about the dependency management mechanisms
+defined by those systems (as well as, for node.js, including types for
+the built-in libraries).&lt;/p&gt;
+&lt;p&gt; A plugin can use several hooks to add custom behavior.&lt;/p&gt;
+&lt;dl&gt;
+&lt;dt&gt;
+&lt;a id="infer.registerFunction"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">registerFunction
+</span>(name: string, f:Â&nbsp;fn(self,Â&nbsp;args,Â&nbsp;argnodes))&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+This is a function in the &lt;a href="#infer"&gt;inference engine module&lt;/a&gt; that
+allows custom ways to compute function return types or effects. When a
+function is specified to return &lt;code&gt;!custom:myname&lt;/code&gt; or has an effect
+&lt;code&gt;"custom myname"&lt;/code&gt;, a call to the function will cause the function
 ...</pre></li>
     </ul>
 
@@ -3293,7 +3671,24 @@ null)
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">resetGuessing = function (val) { guessing = val; }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;dd&gt;
+&lt;p&gt;
+Test whether the
+guessing flag is set.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.resetGuessing"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">resetGuessing
+</span>(val?: bool)&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Reset the
+guessing flag.
+&lt;/p&gt;
+&lt;/dd&gt;
+...</pre></li>
     </ul>
 
 
@@ -3312,7 +3707,25 @@ null)
   if (found) return found.node.scope;
   else return defaultScope || cx.topScope;
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+&lt;p&gt;
+Determine an expression for the given node and scope (as returned by
+the functions above). Will return an &lt;a href="#infer_aval"&gt;&lt;code&gt;AVal&lt;/code&gt;&lt;/a&gt;
+; or plain
+&lt;a href="#infer_types"&gt;&lt;code&gt;Type&lt;/code&gt;&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.scopeAt"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">scopeAt</span>(
+ast: AST, pos: number, scope?: Scope) â†’ Scope&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Find the scope at a given position in the syntax tree. The &lt;code&gt;scope&lt;/code&gt;
+parameter can be used to override the scope used for code that isn&amp;#8217;t
+wrapped in any function.
+&lt;/p&gt;
+...</pre></li>
     </ul>
 
 
@@ -3372,23 +3785,23 @@ infer.ANull.typeName = function() { return "?"; };
   return type.toString(maxDepth, parent);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  return define(["exports", "acorn/dist/acorn", "acorn/dist/acorn_loose", "acorn/dist/walk"
-;, "./def", "./signal"], mod);
-mod(root.tern || (root.tern = {}), acorn, acorn, acorn.walk, tern.def, tern.signal); // Plain browser env
-})(this, function(exports, acorn, acorn_loose, walk, def, signal) {
-"use strict";
-
-var toString = exports.toString = function(type, maxDepth, parent) {
-  if (!type || type == parent || maxDepth &amp;&amp; maxDepth &lt; -3) return "?";
-  return type.<span class="apidocCodeKeywordSpan">toString</span>(maxDepth, parent);
-};
-
-// A variant of AVal used for unknown, dead-end values. Also serves
-// as prototype for AVals, Types, and Constraints because it
-// implements 'empty' versions of all the methods that the code
-// expects.
-var ANull = exports.ANull = signal.mixin({
-...</pre></li>
+The syntax node that
+defined the type. Only present for object and function types, and even
+for those it may be missing (if the type was created by a type
+definition file, or synthesized in some other way).
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.Type.toString"&gt;&lt;/a&gt;&lt;code&gt;type.<span class="apidocCodeKeywordSpan">toString<!--
+span-->(maxDepth: number) â†’ string&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Return
+a string that describes the type. &lt;code&gt;maxDepth&lt;/code&gt; indicates the depth to
+which inner types should be shown.
+&lt;/p&gt;
+...</span></pre></li>
     </ul>
 
 
@@ -3449,21 +3862,24 @@ exports.typeFromContext = function(ast, found) {
   finally { cx = old; }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-this.definitions = Object.create(null);
-this.purgeGen = 0;
-this.workList = null;
-this.disabledComputing = null;
-this.curSuperCtor = this.curSuper = null;
-this.symbols = Object.create(null)
-
-exports.<span class="apidocCodeKeywordSpan">withContext</span>(this, function() {
-  cx.protos.Object = new Obj(null, "Object.prototype");
-  cx.topScope = new Scope();
-  cx.topScope.name = "&lt;top&gt;";
-  cx.protos.Array = new Obj(true, "Array.prototype");
-  cx.protos.Function = new Fn("Function.prototype", ANull, [], [], ANull);
-  cx.protos.Function.proto = cx.protos.Object;
-  cx.protos.RegExp = new Obj(true, "RegExp.prototype");
+&lt;p&gt;
+A constructor
+function for contexts. &lt;code&gt;defs&lt;/code&gt; should be an array of &lt;a href="#typedef"&gt;type definition
+ objects&lt;/a&gt;, which will be used to initialize the
+global scope.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;
+&lt;a id="infer.withContext"&gt;&lt;/a&gt;&lt;code&gt;infer.<span class="apidocCodeKeywordSpan">withContext
+</span>(context: Context, f: fn())&lt;/code&gt;
+&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Calls &lt;code&gt;f&lt;/code&gt; with the current context bound to &lt;code&gt;context&lt;/code&gt;. Basically,
+all
+code that does something with the inference engine should be wrapped
+in such a call.
+&lt;/p&gt;
 ...</pre></li>
     </ul>
 
@@ -3484,7 +3900,23 @@ exports.<span class="apidocCodeKeywordSpan">withContext</span>(this, function() 
   try { return f(); }
   finally { timeout = oldEnd; }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+if (queryType.fullFile &amp;&amp; file.type == "part")
+  return c("Can't run a " + query.type + " query on a file fragment");
+
+infer.resetGuessing()
+infer.withContext(srv.cx, function() {
+  var result, run = function() { result = queryType.run(srv, query, file); };
+  try {
+    if (timeBudget) infer.<span class="apidocCodeKeywordSpan">withTimeout</span>(timeBudget[0], run);
+    else run();
+  } catch (e) {
+    if (srv.options.debug &amp;&amp; e.name != "TernError") console.error(e.stack);
+    return c(e);
+  }
+  c(null, result);
+});
+...</pre></li>
     </ul>
 
 
